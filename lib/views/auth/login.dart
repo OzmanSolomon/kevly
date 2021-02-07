@@ -70,7 +70,7 @@ class _LoginState extends State<Login> {
                   ),
                   ContainerResponsive(
                     height: 39.5,
-                    margin: EdgeInsets.only(
+                    margin: EdgeInsetsResponsive.only(
                       left: 25,
                       right: 25,
                     ),
@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
                   ),
                   ContainerResponsive(
                     height: 39.5,
-                    margin: EdgeInsets.only(
+                    margin: EdgeInsetsResponsive.only(
                       left: 25,
                       right: 25,
                     ),
@@ -179,7 +179,7 @@ class _LoginState extends State<Login> {
                       GestureDetector(
                         onTap: () {},
                         child: ContainerResponsive(
-                          padding: EdgeInsets.all(8),
+                          padding: EdgeInsetsResponsive.all(8),
                           width: 46.37,
                           height: 46.37,
                           decoration: BoxDecoration(
@@ -194,7 +194,7 @@ class _LoginState extends State<Login> {
                       GestureDetector(
                         onTap: () {},
                         child: ContainerResponsive(
-                          padding: EdgeInsets.all(8),
+                          padding: EdgeInsetsResponsive.all(8),
                           width: 46.37,
                           height: 46.37,
                           decoration: BoxDecoration(
@@ -209,7 +209,7 @@ class _LoginState extends State<Login> {
                       GestureDetector(
                         onTap: () {},
                         child: ContainerResponsive(
-                          padding: EdgeInsets.all(8),
+                          padding: EdgeInsetsResponsive.all(8),
                           width: 46.37,
                           height: 46.37,
                           decoration: BoxDecoration(
@@ -243,6 +243,7 @@ class _LoginState extends State<Login> {
                         TextResponsive(
                           "SIGN UP",
                           style: TextStyle(
+                              decoration: TextDecoration.underline,
                               color: Colors.black,
                               fontSize: 14,
                               fontFamily: 'Oswald',
