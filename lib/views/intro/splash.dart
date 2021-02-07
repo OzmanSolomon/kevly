@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kyveli/core/providers/splashProvider.dart';
-import 'package:kyveli/theme/appTheme.dart';
+import 'package:kyveli/widgets/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
@@ -13,13 +13,12 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(Duration.zero, () {
-      _nav(context);
+    Future.delayed(Duration(seconds: 3), () {
+      nav(context);
     });
   }
 
-  void _nav(context) async {
+  void nav(context) async {
     Provider.of<SplashProvider>(context, listen: false).navigationPage(context);
   }
 
@@ -37,41 +36,27 @@ class _SplashState extends State<Splash> {
       width: 375.0,
       allowFontScaling: true,
       child: Scaffold(
+        key: Provider.of<SplashProvider>(context, listen: false).scaffoldKey,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(),
-            Center(
-              child: TextResponsive(
-                '',
-                style: TextStyle(
-                    color: appTheme().primaryColor,
-                    fontSize: 32,
-                    fontFamily: 'GeDinarOne_Medium'),
+            Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                child: Image.asset(
+                  'assets/images/splashTopCorner.png',
+                  height: 180.61.h,
+                ),
               ),
             ),
-            Padding(
-              padding: EdgeInsetsResponsive.only(bottom: 38.0),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Column(
-                  children: [
-                    TextResponsive(
-                      'Powered by',
-                      style: TextStyle(
-                          color: Color(0xffA3A3A3),
-                          fontSize: 13,
-                          fontFamily: 'Optima_Medium'),
-                    ),
-                    TextResponsive(
-                      '',
-                      style: TextStyle(
-                          color: Color(0xff464646),
-                          fontSize: 14,
-                          fontFamily: 'GeDinarOne_Medium'),
-                    ),
-                  ],
+            Center(child: LoaderFetchingData()),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                child: Image.asset(
+                  'assets/images/splashbottomcorner.png',
+                  height: 180.61.h,
                 ),
               ),
             ),

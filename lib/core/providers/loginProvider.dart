@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kyveli/core/services/userServices.dart';
-import 'package:kyveli/views/auth/login.dart';
-import 'package:progress_dialog/progress_dialog.dart';
+import 'package:kyveli/widgets/loading.dart';
 
-class SplashProvider extends ChangeNotifier {
+class LoginProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
-  ProgressDialog pr;
+  final formKey = GlobalKey<FormState>();
   UserServices _userRepository = new UserServices();
-
+  final FocusNode emailFocus = FocusNode();
+  var emailController = TextEditingController();
+  final FocusNode passFocus = FocusNode();
+  var passController = TextEditingController();
   void getData(context, email, pass, scaffoldKey, pr) async {
     try {
       var response =
@@ -18,11 +20,11 @@ class SplashProvider extends ChangeNotifier {
   }
 
   void navigationPage(context) {
-    Navigator.of(context).pushReplacement(
+    Navigator.of(context).push(
       PageRouteBuilder(
           opaque: false,
           pageBuilder: (BuildContext context, _, __) {
-            return Login();
+            return OverLayWidgetWithLoader(false);
           }),
     );
   }
