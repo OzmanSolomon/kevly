@@ -21,8 +21,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   void initState() {
     super.initState();
-    // Provider.of<PushNotificationsProvider>(context, listen: false)
-    //     .setUp(context);
   }
 
   void pageChanged(int index) {
@@ -127,15 +125,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   label: 'BAG'),
             ],
             unselectedItemColor: Colors.black,
-            // ini: bottomNavigationIndex,
             onTap: (index) {
               bottomTapped(index);
             },
-            // height: 60,
-            // color: Colors.grey,
-            // curveSize: 0,
-            // style: TabStyle.custom,
-            // activeColor: appTheme().accentColor,
             backgroundColor: Colors.white,
           ),
         ));

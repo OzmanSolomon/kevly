@@ -27,9 +27,14 @@ class VerticalView extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     child: Stack(
                       children: <Widget>[
-                        Image.asset(
-                          list[index]['img'],
-                          fit: BoxFit.cover,
+                        ClipRRect(
+                          borderRadius: new BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                          child: Image.asset(
+                            list[index]['img'],
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ],
                     )),

@@ -132,9 +132,14 @@ class HomeProvider extends ChangeNotifier {
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       child: Stack(
                         children: <Widget>[
-                          Image.asset(
-                            item,
-                            fit: BoxFit.cover,
+                          ClipRRect(
+                            borderRadius: new BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            child: Image.asset(
+                              item,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ],
                       )),
@@ -156,9 +161,14 @@ class HomeProvider extends ChangeNotifier {
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       child: Stack(
                         children: <Widget>[
-                          Image.asset(
-                            item['img'],
-                            fit: BoxFit.cover,
+                          ClipRRect(
+                            borderRadius: new BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            child: Image.asset(
+                              item['img'],
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ],
                       )),

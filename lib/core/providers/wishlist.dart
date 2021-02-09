@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kyveli/widgets/loading.dart';
 
-class SalesProvider extends ChangeNotifier {
+class WishlistProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = GlobalKey<FormState>();
   final List verticalView = [
@@ -30,14 +29,4 @@ class SalesProvider extends ChangeNotifier {
       'discount': '29.99,00'
     },
   ];
-
-  void navigationPage(context) {
-    Navigator.of(context).push(
-      PageRouteBuilder(
-          opaque: false,
-          pageBuilder: (BuildContext context, _, __) {
-            return OverLayWidgetWithLoader(false);
-          }),
-    );
-  }
 }

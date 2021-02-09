@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kyveli/core/providers/WishlistProvider.dart';
+import 'package:kyveli/core/providers/wishlist.dart';
+import 'package:kyveli/widgets/VerticalView.dart';
+import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
@@ -12,15 +14,6 @@ class _WishlistState extends State<Wishlist> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<WishlistProvider>(context, listen: false).setRegions();
-    });
-  }
-
-//! like button
-  void nav(context) async {
-    Provider.of<WishlistProvider>(context, listen: false)
-        .navigationPage(context);
   }
 
   @override
@@ -36,11 +29,24 @@ class _WishlistState extends State<Wishlist> {
       width: 375.0,
       allowFontScaling: true,
       child: Scaffold(
-        body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Form(
-              child: Column(children: <Widget>[]),
+        key: Provider.of<WishlistProvider>(context, listen: false).scaffoldKey,
+        appBar: CustomAppbar(
+          title: 'WISHLIST',
+        ),
+        body: SafeArea(
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: SingleChildScrollView(
+              child: Form(
+                key: Provider.of<WishlistProvider>(context).formKey,
+                child: Column(children: <Widget>[
+                  Consumer<WishlistProvider>(builder: (context, model, child) {
+                    return VerticalView(
+                      list: model.verticalView,
+                    );
+                  }),
+                ]),
+              ),
             ),
           ),
         ),

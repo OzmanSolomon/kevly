@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kyveli/core/providers/SalesProvider.dart';
+import 'package:kyveli/providers/SalesProvider.dart';
+import 'package:kyveli/widgets/VerticalView.dart';
+import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
@@ -12,14 +14,7 @@ class _SalesState extends State<Sales> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<SalesProvider>(context, listen: false).setRegions();
-    });
-  }
-
-//! like button
-  void nav(context) async {
-    Provider.of<SalesProvider>(context, listen: false).navigationPage(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   @override
@@ -35,11 +30,24 @@ class _SalesState extends State<Sales> {
       width: 375.0,
       allowFontScaling: true,
       child: Scaffold(
-        body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Form(
-              child: Column(children: <Widget>[]),
+        key: Provider.of<SalesProvider>(context, listen: false).scaffoldKey,
+        appBar: CustomAppbar(
+          title: 'SALE',
+        ),
+        body: SafeArea(
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: SingleChildScrollView(
+              child: Form(
+                key: Provider.of<SalesProvider>(context, listen: false).formKey,
+                child: Column(children: <Widget>[
+                  Consumer<SalesProvider>(builder: (context, provider, child) {
+                    return VerticalView(
+                      list: provider.verticalView,
+                    );
+                  }),
+                ]),
+              ),
             ),
           ),
         ),
