@@ -178,7 +178,7 @@ class _LoginState extends State<Login> {
                       Container(),
                       GestureDetector(
                         onTap: () {},
-                        child: ContainerResponsive(
+                        child: Container(
                           padding: EdgeInsetsResponsive.all(8),
                           width: 46.37,
                           height: 46.37,
@@ -193,7 +193,7 @@ class _LoginState extends State<Login> {
                       ),
                       GestureDetector(
                         onTap: () {},
-                        child: ContainerResponsive(
+                        child: Container(
                           padding: EdgeInsetsResponsive.all(8),
                           width: 46.37,
                           height: 46.37,
@@ -208,7 +208,7 @@ class _LoginState extends State<Login> {
                       ),
                       GestureDetector(
                         onTap: () {},
-                        child: ContainerResponsive(
+                        child: Container(
                           padding: EdgeInsetsResponsive.all(8),
                           width: 46.37,
                           height: 46.37,

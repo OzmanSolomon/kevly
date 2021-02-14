@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:kyveli/core/providers/wishlist.dart';
+import 'package:kyveli/core/providers/collectionProductsProvider.dart';
 import 'package:kyveli/widgets/VerticalView.dart';
 import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
-class Wishlist extends StatefulWidget {
+class CollectionProduct extends StatefulWidget {
+  final String title;
+  CollectionProduct({@required this.title});
   @override
-  _WishlistState createState() => _WishlistState();
+  _CollectionProductState createState() => _CollectionProductState();
 }
 
-class _WishlistState extends State<Wishlist> {
+class _CollectionProductState extends State<CollectionProduct> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   @override
@@ -29,23 +32,28 @@ class _WishlistState extends State<Wishlist> {
       width: 375.0,
       allowFontScaling: true,
       child: Scaffold(
-        key: Provider.of<WishlistProvider>(context, listen: false).scaffoldKey,
+        key: Provider.of<CollectionProductsProvider>(context, listen: false)
+            .scaffoldKey,
         appBar: CustomAppbar(
-          productList: Provider.of<WishlistProvider>(context, listen: false)
-              .verticalView,
-          title: 'WISHLIST',
-          isBackButton: false,
+          productList:
+              Provider.of<CollectionProductsProvider>(context, listen: false)
+                  .verticalView,
+          title: widget.title,
+          isBackButton: true,
         ),
         body: SafeArea(
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
               child: Form(
-                key: Provider.of<WishlistProvider>(context).formKey,
+                key: Provider.of<CollectionProductsProvider>(context,
+                        listen: false)
+                    .formKey,
                 child: Column(children: <Widget>[
-                  Consumer<WishlistProvider>(builder: (context, model, child) {
+                  Consumer<CollectionProductsProvider>(
+                      builder: (context, provider, child) {
                     return VerticalView(
-                      list: model.verticalView,
+                      list: provider.verticalView,
                     );
                   }),
                 ]),

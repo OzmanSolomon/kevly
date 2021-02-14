@@ -61,18 +61,17 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                          onTap: () => Navigator.of(context).push(
-                            PageRouteBuilder(
-                                opaque: false,
-                                pageBuilder: (BuildContext context, _, __) {
-                                  return CustomDrawer();
-                                }),
-                          ),
-                          child: Center(
-                            child: SvgPicture.asset(
-                              'assets/images/homeMenu.svg',
-                              height: 15.5.h,
-                              width: 22.14.w,
+                          onTap: () => Navigator.push(
+                              context, SlideRightRoute(page: CustomDrawer())),
+                          child: Container(
+                            height: 40.5.h,
+                            width: 40.14.w,
+                            child: Center(
+                              child: SvgPicture.asset(
+                                'assets/images/homeMenu.svg',
+                                height: 15.5.h,
+                                width: 22.14.w,
+                              ),
                             ),
                           ),
                         ),

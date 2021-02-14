@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:kyveli/core/providers/wishlist.dart';
+import 'package:kyveli/core/providers/filterProductsProvider.dart';
 import 'package:kyveli/widgets/VerticalView.dart';
 import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
-class Wishlist extends StatefulWidget {
+class FilterProducts extends StatefulWidget {
+  final List productList;
+  FilterProducts({@required this.productList});
   @override
-  _WishlistState createState() => _WishlistState();
+  _FilterProductsState createState() => _FilterProductsState();
 }
 
-class _WishlistState extends State<Wishlist> {
+class _FilterProductsState extends State<FilterProducts> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   @override
@@ -29,23 +32,25 @@ class _WishlistState extends State<Wishlist> {
       width: 375.0,
       allowFontScaling: true,
       child: Scaffold(
-        key: Provider.of<WishlistProvider>(context, listen: false).scaffoldKey,
+        key: Provider.of<FilterProductsProvider>(context, listen: false)
+            .scaffoldKey,
         appBar: CustomAppbar(
-          productList: Provider.of<WishlistProvider>(context, listen: false)
-              .verticalView,
-          title: 'WISHLIST',
-          isBackButton: false,
+          productList: [],
+          title: 'Filter',
+          isBackButton: true,
         ),
         body: SafeArea(
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
               child: Form(
-                key: Provider.of<WishlistProvider>(context).formKey,
+                key: Provider.of<FilterProductsProvider>(context, listen: false)
+                    .formKey,
                 child: Column(children: <Widget>[
-                  Consumer<WishlistProvider>(builder: (context, model, child) {
+                  Consumer<FilterProductsProvider>(
+                      builder: (context, provider, child) {
                     return VerticalView(
-                      list: model.verticalView,
+                      list: widget.productList,
                     );
                   }),
                 ]),

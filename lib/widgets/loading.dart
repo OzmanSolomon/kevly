@@ -94,7 +94,7 @@ class _OverLayWidgetWithLoaderState extends State<OverLayWidgetWithLoader> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        SizedBoxResponsive(
                           height: 15,
                         ),
                         TextResponsive(
