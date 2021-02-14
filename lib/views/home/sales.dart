@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kyveli/providers/SalesProvider.dart';
+import 'package:kyveli/core/providers/SalesProvider.dart';
 import 'package:kyveli/widgets/VerticalView.dart';
 import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:provider/provider.dart';
@@ -31,9 +31,6 @@ class _SalesState extends State<Sales> {
       allowFontScaling: true,
       child: Scaffold(
         key: Provider.of<SalesProvider>(context, listen: false).scaffoldKey,
-        appBar: CustomAppbar(
-          title: 'SALE',
-        ),
         body: SafeArea(
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
@@ -41,6 +38,9 @@ class _SalesState extends State<Sales> {
               child: Form(
                 key: Provider.of<SalesProvider>(context, listen: false).formKey,
                 child: Column(children: <Widget>[
+                  CustomAppbar(
+                    title: 'SALE',
+                  ),
                   Consumer<SalesProvider>(builder: (context, provider, child) {
                     return VerticalView(
                       list: provider.verticalView,

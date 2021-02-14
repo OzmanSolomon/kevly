@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/providers/HomeProvider.dart';
 import 'package:kyveli/theme/appTheme.dart';
 import 'package:kyveli/widgets/VerticalView.dart';
+import 'package:kyveli/widgets/drawer.dart';
+import 'package:kyveli/widgets/navigations.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
@@ -58,11 +60,20 @@ class _HomeState extends State<Home> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Center(
-                          child: SvgPicture.asset(
-                            'assets/images/homeMenu.svg',
-                            height: 15.5.h,
-                            width: 22.14.w,
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                            PageRouteBuilder(
+                                opaque: false,
+                                pageBuilder: (BuildContext context, _, __) {
+                                  return CustomDrawer();
+                                }),
+                          ),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              'assets/images/homeMenu.svg',
+                              height: 15.5.h,
+                              width: 22.14.w,
+                            ),
                           ),
                         ),
                         ContainerResponsive(

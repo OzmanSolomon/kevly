@@ -54,7 +54,7 @@ flutter:
     - assets/images/logo.png
     - assets/images/splashTopCorner.svg
     - assets/images/splashbottomcorner.svg
-    - assets/images/WeeklySlider1.png
+    - assets/images/weeklySlider1.png
     - assets/images/weeklySlider2.png
     - assets/images/homeIcon.svg
 

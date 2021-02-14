@@ -30,9 +30,6 @@ class _WishlistState extends State<Wishlist> {
       allowFontScaling: true,
       child: Scaffold(
         key: Provider.of<WishlistProvider>(context, listen: false).scaffoldKey,
-        appBar: CustomAppbar(
-          title: 'WISHLIST',
-        ),
         body: SafeArea(
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
@@ -40,6 +37,9 @@ class _WishlistState extends State<Wishlist> {
               child: Form(
                 key: Provider.of<WishlistProvider>(context).formKey,
                 child: Column(children: <Widget>[
+                  CustomAppbar(
+                    title: 'WISHLIST',
+                  ),
                   Consumer<WishlistProvider>(builder: (context, model, child) {
                     return VerticalView(
                       list: model.verticalView,

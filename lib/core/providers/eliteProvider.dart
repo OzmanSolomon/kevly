@@ -23,13 +23,13 @@ class EliteProvider extends ChangeNotifier {
   ];
   final List weeklySliderList = [
     {
-      'img': 'assets/images/WeeklySlider1.png',
+      'img': 'assets/images/weeklySlider1.png',
       'name': 'Waist Shipping Blouse',
       'price': '68.88',
       'discount': '1.390,00'
     },
     {
-      'img': 'assets/images/WeeklySlider2.png',
+      'img': 'assets/images/weeklySlider2.png',
       'name': 'Poplur shirt',
       'price': '60',
       'discount': '29.99,00'
