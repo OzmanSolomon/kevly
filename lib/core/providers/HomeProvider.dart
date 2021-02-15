@@ -125,25 +125,14 @@ class HomeProvider extends ChangeNotifier {
         .map((item) => ContainerResponsive(
               width: 335,
               height: 232,
-              margin: EdgeInsetsResponsive.all(5.0),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      child: Stack(
-                        children: <Widget>[
-                          ClipRRect(
-                            borderRadius: new BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                            child: Image.asset(
-                              item,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ],
-                      )),
-                ],
+              child: ClipRRect(
+                borderRadius: new BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                child: Image.asset(
+                  item,
+                  fit: BoxFit.cover,
+                ),
               ),
             ))
         .toList();
@@ -154,25 +143,14 @@ class HomeProvider extends ChangeNotifier {
         .map((item) => ContainerResponsive(
               width: 280,
               height: 165,
-              margin: EdgeInsetsResponsive.all(5.0),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      child: Stack(
-                        children: <Widget>[
-                          ClipRRect(
-                            borderRadius: new BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                            child: Image.asset(
-                              item['img'],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ],
-                      )),
-                ],
+              child: ClipRRect(
+                borderRadius: new BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                child: Image.asset(
+                  item['img'],
+                  fit: BoxFit.cover,
+                ),
               ),
             ))
         .toList();

@@ -36,6 +36,7 @@ class _FilterProductsState extends State<FilterProducts> {
             .scaffoldKey,
         appBar: CustomAppbar(
           productList: [],
+          hideFilter: true,
           title: 'Filter',
           isBackButton: true,
         ),

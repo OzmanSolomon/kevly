@@ -10,12 +10,14 @@ import 'package:kyveli/core/providers/wishlist.dart';
 import 'package:kyveli/core/providers/SalesProvider.dart';
 import 'package:kyveli/core/providers/filterProvider.dart';
 import 'package:kyveli/theme/appTheme.dart';
+
 import 'package:kyveli/widgets/bottomNavigator.dart';
 import 'package:provider/provider.dart';
 import 'core/providers/collectionProductsProvider.dart';
 import 'core/providers/bottomNavProvider.dart';
 import 'core/providers/collectionProvider.dart';
 import 'core/providers/filterProductsProvider.dart';
+import 'core/providers/productDetails.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,6 +29,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => SplashProvider()),
+        ChangeNotifierProvider(create: (_) => ProductDetialsProvider()),
         ChangeNotifierProvider(create: (_) => FilterProvider()),
         ChangeNotifierProvider(create: (_) => CollectionProductsProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavProvider()),

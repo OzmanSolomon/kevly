@@ -184,6 +184,7 @@ class _HomeState extends State<Home> {
                     return CarouselSlider(
                       items: provider.imageSliders,
                       options: CarouselOptions(
+                          viewportFraction: 1,
                           autoPlay: true,
                           enlargeCenterPage: true,
                           aspectRatio: 335 / 232,
@@ -237,6 +238,7 @@ class _HomeState extends State<Home> {
                     return CarouselSlider(
                       items: provider.imageWeeklySliders,
                       options: CarouselOptions(
+                          viewportFraction: 0.6,
                           autoPlay: true,
                           enlargeCenterPage: true,
                           aspectRatio: 280 / 165,
