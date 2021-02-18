@@ -12,8 +12,6 @@ class LoaderFetchingData extends StatelessWidget {
         text: 'Loading . . .',
         waveColor: appTheme().primaryColor,
         boxBackgroundColor: appTheme().scaffoldBackgroundColor,
-        // loadDuration: Duration(seconds: 2),
-        // waveDuration: Duration(seconds: 2),
         textStyle: TextStyle(
           color: Colors.black,
           fontFamily: 'Oswald',
@@ -67,7 +65,6 @@ class _OverLayWidgetWithLoaderState extends State<OverLayWidgetWithLoader> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //! delete on release
       onTap: () => Navigator.pop(context),
       child: Opacity(
         opacity: 0.55,
@@ -119,7 +116,6 @@ class _OverLayWidgetWithLoaderState extends State<OverLayWidgetWithLoader> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 }

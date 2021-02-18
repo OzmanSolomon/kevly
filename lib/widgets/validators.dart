@@ -1,4 +1,3 @@
-
 class Validator {
   static String validateName(String value) {
     String pattern = r'(^[a-zA-Z ]*$)';
@@ -11,7 +10,7 @@ class Validator {
     return null;
   }
 
-  static String validateMobile(String value) {
+  static String validatePhoneNumber(String value) {
     String pattern = r'(^[0-9]*$)';
     RegExp regExp = new RegExp(pattern);
     if (value.length == 0) {
@@ -38,6 +37,13 @@ class Validator {
       return "Code can't be empty";
     } else if (value.length < 4) {
       return "invalid code";
+    }
+    return null;
+  }
+
+  static String validateNormalText(String value) {
+    if (value.length == 0) {
+      return "This Value can't be empty";
     }
     return null;
   }

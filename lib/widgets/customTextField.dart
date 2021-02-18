@@ -70,7 +70,6 @@ class CustomTextField extends StatelessWidget {
           fontFamily: 'Oswald',
         ),
         validator: _validator,
-        //textAlign: TextAlign.right,
         focusNode: _userNameFocus,
         textInputAction: TextInputAction.done,
         controller: controller,

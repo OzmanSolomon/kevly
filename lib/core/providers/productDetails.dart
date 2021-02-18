@@ -6,7 +6,20 @@ class ProductDetialsProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = GlobalKey<FormState>();
   List<Widget> imageSliders;
+  int quantity = 1;
   int current = 0;
+  Map selectedColor;
+  Map selectedSize;
+  get total {
+    dynamic discount = product['discount'];
+    discount =
+        discount != null && discount != '0' ? double.parse(discount) : null;
+    dynamic price = product['price'];
+    price = price != null && price != '0' ? double.parse(price) : price;
+    double myTotal = discount != null ? quantity * discount : quantity * price;
+    return '$myTotal';
+  }
+
   Map product = {
     'name': 'Puffy Shoulders Blazer',
     'image': '',
@@ -41,17 +54,29 @@ class ProductDetialsProvider extends ChangeNotifier {
     },
     'suggestions': [
       {
-        'name': 'Dior-ID Sneaker',
-        'discount': '52.65',
+        'img': 'assets/images/verticalView1.png',
+        'name': 'Waist Shipping Blouse',
         'price': '68.88',
-        'image': ''
+        'discount': '1.390,00'
       },
       {
-        'name': 'White Pant',
-        'discount': '83.56',
-        'price': '133.21',
-        'image': ''
-      }
+        'img': 'assets/images/verticalView2.png',
+        'name': 'Poplur shirt',
+        'price': '60',
+        'discount': '29.99,00'
+      },
+      {
+        'img': 'assets/images/verticalView3.png',
+        'name': 'Waist Shipping Blouse',
+        'price': '68.88',
+        'discount': '1.390,00'
+      },
+      {
+        'img': 'assets/images/verticalView4.png',
+        'name': 'Poplur shirt',
+        'price': '60',
+        'discount': '29.99,00'
+      },
     ]
   };
   void setSlider(width) {
@@ -68,6 +93,11 @@ class ProductDetialsProvider extends ChangeNotifier {
         .toList();
   }
 
+  void onSelectColor({@required color}) {
+    selectedColor = selectedColor == color ? null : color;
+    notifyListeners();
+  }
+
   void navigationPage(context) {
     Navigator.of(context).push(
       PageRouteBuilder(
@@ -76,5 +106,20 @@ class ProductDetialsProvider extends ChangeNotifier {
             return OverLayWidgetWithLoader(false);
           }),
     );
+  }
+
+  void onSelectSize({@required size}) {
+    selectedSize = selectedSize == size ? null : size;
+    notifyListeners();
+  }
+
+  increaseQuantity() {
+    quantity++;
+    notifyListeners();
+  }
+
+  decreaseQuantity() {
+    quantity--;
+    notifyListeners();
   }
 }

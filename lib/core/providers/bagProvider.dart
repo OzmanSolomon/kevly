@@ -1,99 +1,96 @@
 import 'package:flutter/material.dart';
-import 'package:kyveli/core/services/userServices.dart';
-import 'package:kyveli/widgets/loading.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BagProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> checkoutScaffoldKey =
+      new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> deliveryScaffoldKey =
+      new GlobalKey<ScaffoldState>();
   final formKey = GlobalKey<FormState>();
-  UserServices _userRepository = new UserServices();
-  final FocusNode emailFocus = FocusNode();
-  var emailController = TextEditingController();
-  final FocusNode passFocus = FocusNode();
-  var passController = TextEditingController();
-  int current = 0;
-  int currentWeekly = 0;
-  List<Widget> imageSliders;
-  List<Widget> imageWeeklySliders;
+  final checkoutFormKey = GlobalKey<FormState>();
+  final deliveryFormKey = GlobalKey<FormState>();
+  var deliveryMethod;
+  final FocusNode firstNameFocus = FocusNode();
+  var firstNameController = TextEditingController();
+  final FocusNode lastNameFocus = FocusNode();
+  var lastNameController = TextEditingController();
+  final FocusNode emailNameFocus = FocusNode();
+  var emailNameController = TextEditingController();
+  final FocusNode phoneNameFocus = FocusNode();
+  var phoneNameController = TextEditingController();
+  final FocusNode addressNameFocus = FocusNode();
+  var addressNameController = TextEditingController();
+  final FocusNode postcodeNameFocus = FocusNode();
+  var postcodeNameController = TextEditingController();
   List<DropdownMenuItem<String>> regoins;
+  int quantity = 1;
+  bool promoCodeApplied = false;
   String region = 'LEBANON';
-  final List<String> sliderImagesList = [
-    'assets/images/slider.png',
-    'assets/images/logo.png',
+  var deliveryMethods = [
+    {'name': 'EXPRESS', 'time': '24 hrs', 'cost': '15.99'},
+    {'name': 'NORMAL', 'time': '7-14 Days', 'cost': '5.99'},
+    {'name': 'SEMI-EXPRESS', 'time': '3-4 Days', 'cost': '8.99'},
   ];
-  final List weeklySliderList = [
-    {
-      'img': 'assets/images/weeklySlider1.png',
-      'name': 'Waist Shipping Blouse',
-      'price': '68.88',
-      'discount': '1.390,00'
-    },
-    {
-      'img': 'assets/images/weeklySlider2.png',
-      'name': 'Poplur shirt',
-      'price': '60',
-      'discount': '29.99,00'
-    },
+  var regoinsList = [
+    'LEBANON',
   ];
-  final List verticalView = [
+  final List bagItems = [
     {
       'img': 'assets/images/verticalView1.png',
       'name': 'Waist Shipping Blouse',
       'price': '68.88',
-      'discount': '1.390,00'
+      'discount': '1.39000',
+      'desc': 'Dark Black - Ref. BEI289304',
+      'size': 'L',
+      'quantity': 1
     },
     {
       'img': 'assets/images/verticalView2.png',
       'name': 'Poplur shirt',
       'price': '60',
-      'discount': '29.99,00'
+      'discount': '29.9900',
+      'desc': 'Dark Black - Ref. BEI289304',
+      'size': 'XL',
+      'quantity': 1
     },
     {
       'img': 'assets/images/verticalView3.png',
       'name': 'Waist Shipping Blouse',
       'price': '68.88',
-      'discount': '1.390,00'
+      'discount': '1.39000',
+      'desc': 'Dark Black - Ref. BEI289304',
+      'size': 'S',
+      'quantity': 1
     },
     {
       'img': 'assets/images/verticalView4.png',
       'name': 'Poplur shirt',
       'price': '60',
-      'discount': '29.99,00'
+      'discount': '29.9900',
+      'desc': 'Dark Black - Ref. BEI289304',
+      'size': 'M',
+      'quantity': 1
     },
   ];
-
-  var regoinsList = [
-    'LEBANON',
-  ];
-  var cates = [
-    {'img': 'assets/images/cate1.png', 'name': 'Jackets'},
-    {'img': 'assets/images/cate2.png', 'name': 'Shoes'},
-    {'img': 'assets/images/cate3.png', 'name': 'Accessories'},
-    {'img': 'assets/images/cate4.png', 'name': 'Bags'},
-    {'img': 'assets/images/cate5.png', 'name': 'Hoodies'},
-  ];
-  void getData(context, email, pass, scaffoldKey, pr) async {
-    try {
-      var response =
-          _userRepository.login(email, pass, context, scaffoldKey, pr);
-      FocusScope.of(context).unfocus();
-      response.then((onValue) {});
-    } catch (e) {}
+  double get total {
+    double myTotal = 0.0;
+    bagItems.forEach((item) {
+      double discount =
+          item['discount'] != null ? double.parse(item['discount']) : null;
+      double price = item['price'] != null ? double.parse(item['price']) : null;
+      myTotal = discount != null && discount != 0.0
+          ? myTotal + discount * item['quantity']
+          : myTotal + price * item['quantity'];
+    });
+    myTotal = deliveryMethod != null
+        ? myTotal + double.parse(deliveryMethod['cost'])
+        : myTotal;
+    return myTotal;
   }
 
-  changeWeeklySlider(index) {
-    currentWeekly = index;
-    notifyListeners();
-  }
-
-  void navigationPage(context) {
-    Navigator.of(context).push(
-      PageRouteBuilder(
-          opaque: false,
-          pageBuilder: (BuildContext context, _, __) {
-            return OverLayWidgetWithLoader(false);
-          }),
-    );
+  double get totalDiscount {
+    return total - 20;
   }
 
   List<DropdownMenuItem<String>> getDropRegoin(List _cats) {
@@ -120,51 +117,28 @@ class BagProvider extends ChangeNotifier {
     regoins = getDropRegoin(regoinsList);
   }
 
-  void setSlider() {
-    imageSliders = sliderImagesList
-        .map((item) => ContainerResponsive(
-              width: 335,
-              height: 232,
-              margin: EdgeInsetsResponsive.all(5.0),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      child: Stack(
-                        children: <Widget>[
-                          Image.asset(
-                            item,
-                            fit: BoxFit.cover,
-                          ),
-                        ],
-                      )),
-                ],
-              ),
-            ))
-        .toList();
+  void onSelectMethod({@required method}) {
+    deliveryMethod = deliveryMethod == method ? null : method;
+    notifyListeners();
   }
 
-  void setWeekltySlider() {
-    imageWeeklySliders = weeklySliderList
-        .map((item) => ContainerResponsive(
-              width: 280,
-              height: 165,
-              margin: EdgeInsetsResponsive.all(5.0),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      child: Stack(
-                        children: <Widget>[
-                          Image.asset(
-                            item['img'],
-                            fit: BoxFit.cover,
-                          ),
-                        ],
-                      )),
-                ],
-              ),
-            ))
-        .toList();
+  increaseQuantity(index) {
+    bagItems[index]['quantity']++;
+    quantity++;
+    notifyListeners();
+  }
+
+  decreaseQuantity(index) {
+    bagItems[index]['quantity']--;
+    notifyListeners();
+  }
+
+  deleteProduct() {
+    notifyListeners();
+  }
+
+  applyPromo() {
+    promoCodeApplied = true;
+    notifyListeners();
   }
 }

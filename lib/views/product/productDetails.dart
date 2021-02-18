@@ -2,10 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/base/colorConvirter.dart';
-import 'package:kyveli/core/providers/filterProvider.dart';
 import 'package:kyveli/core/providers/productDetails.dart';
 import 'package:kyveli/theme/appTheme.dart';
-import 'package:kyveli/widgets/customButton.dart';
+import 'package:kyveli/widgets/VerticalView.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
@@ -37,11 +36,9 @@ class _ProductDetailsState extends State<ProductDetails> {
       width: 375.0,
       allowFontScaling: true,
       child: Scaffold(
-        key: Provider.of<FilterProvider>(context, listen: false).scaffoldKey,
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Form(
-            key: Provider.of<FilterProvider>(context, listen: false).formKey,
             child: SingleChildScrollView(
               child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -115,7 +112,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             width: 25,
                           ),
                           TextResponsive(
-                            provider.product['status'],
+                            provider.product['status'].toUpperCase(),
                             textAlign: TextAlign.right,
                             style: TextStyle(
                                 color: Color(0xff11AA6F),
@@ -216,43 +213,97 @@ class _ProductDetailsState extends State<ProductDetails> {
                       );
                     }),
                     SizedBoxResponsive(
+                      height: 34,
+                    ),
+                    Center(
+                      child: ContainerResponsive(
+                        padding: EdgeInsetsResponsive.all(8),
+                        width: 325,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 1)),
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/size.svg',
+                              width: 33.28.w,
+                              height: 17.h,
+                            ),
+                            SizedBoxResponsive(
+                              width: 5,
+                            ),
+                            TextResponsive(
+                              'Size guide',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'Oswald',
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBoxResponsive(
                       height: 33,
                     ),
                     Column(
                       children: [
-                        colorsWidget(),
-                        SizedBoxResponsive(
-                          height: 17,
-                        ),
                         sizesWidget(),
                         SizedBoxResponsive(
                           height: 17,
                         ),
-                        sortWidget(),
+                        colorsWidget(width),
+                        SizedBoxResponsive(
+                          height: 17,
+                        ),
+                        sortWidget(width),
+                        SizedBoxResponsive(
+                          height: 17,
+                        ),
+                        Center(
+                          child: ContainerResponsive(
+                            padding: EdgeInsetsResponsive.all(8),
+                            width: 325,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 1)),
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextResponsive(
+                                  'ADD',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 17,
+                                      fontFamily: 'Oswald',
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         SizedBoxResponsive(
                           height: 17,
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsetsResponsive.only(bottom: 36.0),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: ContainerResponsive(
-                            width: 325,
-                            height: 50,
-                            child: Consumer<FilterProvider>(
-                                builder: (context, provider, child) {
-                              return CustomRaisedButton(
-                                fontColor: Color(0xffFFFFFF),
-                                fontFamily: 'GeDinarOne_Medium',
-                                fontSize: 17,
-                                onPressed: () {},
-                                title: 'Done',
-                              );
-                            })),
-                      ),
+                    SizedBoxResponsive(
+                      height: 17,
                     ),
+                    Consumer<ProductDetialsProvider>(
+                        builder: (context, provider, child) {
+                      return VerticalView(
+                        list: provider.product['suggestions'],
+                        showAddToBagButton: true,
+                      );
+                    })
                   ]),
             ),
           ),
@@ -261,7 +312,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  Column colorsWidget() {
+  Column colorsWidget(width) {
     return Column(
       children: [
         Row(
@@ -270,7 +321,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               width: 25,
             ),
             TextResponsive(
-              'Color',
+              'ITEM Color'.toUpperCase(),
               textAlign: TextAlign.right,
               style: TextStyle(
                   color: Colors.black,
@@ -283,67 +334,74 @@ class _ProductDetailsState extends State<ProductDetails> {
         SizedBoxResponsive(
           height: 17,
         ),
-        Padding(
-          padding: EdgeInsets.only(left: 25.0, right: 25.0),
-          child: Consumer<FilterProvider>(builder: (context, provider, child) {
+        Container(
+          width: width,
+          child: Consumer<ProductDetialsProvider>(
+              builder: (context, provider, child) {
+            List colorsList = provider.product['attrbute']['colors'];
+
             return GridView.builder(
-                itemCount: provider.colors.length,
+                itemCount: colorsList.length,
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 60 / 20, crossAxisCount: 2),
+                    childAspectRatio: 1 / 1, crossAxisCount: 5),
                 itemBuilder: (BuildContext context, int index) {
                   bool isSelected = provider.selectedColor != null
                       ? provider.selectedColor['value'] ==
-                              provider.colors[index]['value']
+                              colorsList[index]['value']
                           ? true
                           : false
                       : false;
                   return GestureDetector(
                     onTap: () =>
-                        provider.onSelectColor(color: provider.colors[index]),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsetsResponsive.all(8),
-                          width: 15,
-                          height: 15,
-                          decoration: BoxDecoration(
-                              color: HexColor(provider.colors[index]['value']),
-                              borderRadius: BorderRadius.circular(360),
-                              border: Border.all(
-                                  color: provider.colors[index]['value']
-                                              .toString()
-                                              .toUpperCase() ==
-                                          '#FFFFFF'
-                                      ? Colors.black
-                                      : HexColor(
-                                          provider.colors[index]['value']),
-                                  width: 2)),
-                        ),
-                        SizedBoxResponsive(
-                          width: 10,
-                        ),
-                        TextResponsive(
-                          provider.colors[index]['lable'],
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              color:
-                                  isSelected ? Colors.black : Color(0xff666E74),
-                              fontSize: 13,
-                              fontFamily: 'Oswald',
-                              fontWeight: FontWeight.w300),
-                        ),
-                        SizedBoxResponsive(
-                          width: 10,
-                        ),
-                        isSelected
+                        provider.onSelectColor(color: colorsList[index]),
+                    child: Container(
+                      width: 38,
+                      height: 38,
+                      margin: EdgeInsets.all(20),
+                      padding: EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(360),
+                        border: Border.all(
+                            color: isSelected
+                                ? colorsList[index]['value']
+                                            .toString()
+                                            .toUpperCase() ==
+                                        '#FFFFFF'
+                                    ? Colors.black
+                                    : HexColor(colorsList[index]['value'])
+                                : Colors.transparent,
+                            width: 2),
+                      ),
+                      child: Container(
+                        width: 33,
+                        height: 33,
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color: HexColor(colorsList[index]['value']),
+                            borderRadius: BorderRadius.circular(360),
+                            border: Border.all(
+                                color: colorsList[index]['value']
+                                            .toString()
+                                            .toUpperCase() ==
+                                        '#FFFFFF'
+                                    ? Colors.black
+                                    : HexColor(colorsList[index]['value']),
+                                width: 2)),
+                        child: isSelected
                             ? SvgPicture.asset(
                                 'assets/images/correct.svg',
+                                color: colorsList[index]['value']
+                                            .toString()
+                                            .toUpperCase() ==
+                                        '#FFFFFF'
+                                    ? Colors.black
+                                    : Colors.white,
                                 width: 11.58.w,
                                 height: 10.h,
                               )
-                            : Container()
-                      ],
+                            : Container(),
+                      ),
                     ),
                   );
                 });
@@ -362,7 +420,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               width: 25,
             ),
             TextResponsive(
-              'Size',
+              'ITEM Size'.toUpperCase(),
               textAlign: TextAlign.right,
               style: TextStyle(
                   color: Colors.black,
@@ -377,45 +435,46 @@ class _ProductDetailsState extends State<ProductDetails> {
         ),
         Padding(
           padding: EdgeInsets.only(left: 25.0, right: 25.0),
-          child: Consumer<FilterProvider>(builder: (context, provider, child) {
+          child: Consumer<ProductDetialsProvider>(
+              builder: (context, provider, child) {
+            List sizesList = provider.product['attrbute']['sizes'];
             return GridView.builder(
-                itemCount: provider.sizes.length,
+                itemCount: sizesList.length,
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 60 / 20, crossAxisCount: 3),
+                    childAspectRatio: 1, crossAxisCount: 5),
                 itemBuilder: (BuildContext context, int index) {
                   bool isSelected = provider.selectedSize != null
                       ? provider.selectedSize['value'] ==
-                              provider.sizes[index]['value']
+                              sizesList[index]['value']
                           ? true
                           : false
                       : false;
                   return GestureDetector(
-                    onTap: () =>
-                        provider.onSelectSize(size: provider.sizes[index]),
-                    child: Row(
-                      children: [
-                        TextResponsive(
-                          provider.sizes[index]['lable'],
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              color:
-                                  isSelected ? Colors.black : Color(0xff666E74),
-                              fontSize: 13,
-                              fontFamily: 'Oswald',
-                              fontWeight: FontWeight.w300),
-                        ),
-                        SizedBoxResponsive(
-                          width: 10,
-                        ),
-                        isSelected
-                            ? SvgPicture.asset(
-                                'assets/images/correct.svg',
-                                width: 11.58.w,
-                                height: 10.h,
-                              )
-                            : Container()
-                      ],
+                    onTap: () => provider.onSelectSize(size: sizesList[index]),
+                    child: Container(
+                      height: 33,
+                      width: 33,
+                      margin: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          color: isSelected ? Colors.black : Colors.white,
+                          borderRadius: BorderRadius.circular(360),
+                          border: Border.all(color: Colors.black, width: 1)),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextResponsive(
+                            sizesList[index]['lable'],
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                                color: isSelected ? Colors.white : Colors.black,
+                                fontSize: 13,
+                                fontFamily: 'Oswald',
+                                fontWeight: FontWeight.w300),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 });
@@ -425,7 +484,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  Column sortWidget() {
+  Column sortWidget(width) {
     return Column(
       children: [
         Row(
@@ -434,7 +493,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               width: 25,
             ),
             TextResponsive(
-              'SORT BY',
+              'Quantity'.toUpperCase(),
               textAlign: TextAlign.right,
               style: TextStyle(
                   color: Colors.black,
@@ -449,48 +508,74 @@ class _ProductDetailsState extends State<ProductDetails> {
         ),
         Padding(
           padding: EdgeInsets.only(left: 25.0, right: 25.0),
-          child: Consumer<FilterProvider>(builder: (context, provider, child) {
-            return GridView.builder(
-                itemCount: provider.sort.length,
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 60 / 20, crossAxisCount: 2),
-                itemBuilder: (BuildContext context, int index) {
-                  bool isSelected = provider.selectedSort != null
-                      ? provider.selectedSort['value'] ==
-                              provider.sort[index]['value']
-                          ? true
-                          : false
-                      : false;
-                  return GestureDetector(
-                    onTap: () =>
-                        provider.onSelectSort(sort: provider.sort[index]),
-                    child: Row(
-                      children: [
-                        TextResponsive(
-                          provider.sort[index]['lable'],
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              color:
-                                  isSelected ? Colors.black : Color(0xff666E74),
-                              fontSize: 13,
-                              fontFamily: 'Oswald',
-                              fontWeight: FontWeight.w300),
-                        ),
-                        SizedBoxResponsive(
-                          width: 10,
-                        ),
-                        isSelected
-                            ? SvgPicture.asset(
-                                'assets/images/correct.svg',
-                                width: 11.58.w,
-                                height: 10.h,
-                              )
-                            : Container()
-                      ],
+          child: Consumer<ProductDetialsProvider>(
+              builder: (context, provider, child) {
+            return Row(
+              children: [
+                GestureDetector(
+                  onTap: () => provider.decreaseQuantity(),
+                  child: Container(
+                    height: 33,
+                    width: 33,
+                    margin: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(360),
+                        border: Border.all(color: Colors.black, width: 1)),
+                    alignment: Alignment.center,
+                    child: TextResponsive(
+                      '-',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontFamily: 'Oswald',
+                          fontWeight: FontWeight.w300),
                     ),
-                  );
-                });
+                  ),
+                ),
+                TextResponsive(
+                  '${provider.quantity}',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontFamily: 'Oswald',
+                      fontWeight: FontWeight.w300),
+                ),
+                GestureDetector(
+                  onTap: () => provider.increaseQuantity(),
+                  child: Container(
+                    height: 33,
+                    width: 33,
+                    margin: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(360),
+                        border: Border.all(color: Colors.black, width: 1)),
+                    alignment: Alignment.center,
+                    child: TextResponsive(
+                      '+',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontFamily: 'Oswald',
+                          fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                ),
+                TextResponsive(
+                  '( \$${provider.total} USD )',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      color: Color(0xff8D8D8D),
+                      fontSize: 15,
+                      fontFamily: 'Oswald',
+                      fontWeight: FontWeight.w300),
+                ),
+              ],
+            );
           }),
         ),
       ],

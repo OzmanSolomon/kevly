@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-String baseUrl = 'https://api2.shghf.com/api/v1/';
+String baseUrl = 'https://';
 BaseOptions options = BaseOptions(
   baseUrl: baseUrl,
   headers: {

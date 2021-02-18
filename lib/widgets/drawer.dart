@@ -53,7 +53,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                       ),
                     ),
-                    Expanded(
+                    Container(
+                      width: 400,
+                      height: 400,
                       child: Consumer<DrawerProvider>(
                           builder: (context, provider, child) {
                         return ListView.builder(

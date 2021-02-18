@@ -18,7 +18,6 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
-      // nav(context);
       successToast('test my toast');
     });
   }

@@ -11,10 +11,14 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   CustomAppbar({
     @required this.title,
     this.hideFilter,
+    this.showClearBtn,
+    this.onClear,
     @required this.isBackButton,
-    @required this.productList,
+    this.productList,
   });
   final String title;
+  final onClear;
+  final bool showClearBtn;
   final bool hideFilter;
   final bool isBackButton;
   final List productList;
@@ -81,29 +85,46 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                       fontFamily: 'Oswald',
                       fontWeight: FontWeight.w300),
                 ),
-                hideFilter == true
-                    ? Container()
-                    : GestureDetector(
-                        onTap: () => Navigator.push(
-                            context,
-                            SlideTopRoute(
-                                page: FilterView(
-                              productList: productList,
-                            ))),
+                showClearBtn == true
+                    ? GestureDetector(
+                        onTap: () => onClear(),
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                          child: Center(
-                            child: TextResponsive(
-                              'Filter',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 10,
-                                  fontFamily: 'Oswald',
-                                  fontWeight: FontWeight.w300),
-                            ),
+                          child: TextResponsive(
+                            'CLEAR',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 10,
+                                fontFamily: 'Oswald',
+                                fontWeight: FontWeight.w100),
                           ),
                         ),
-                      ),
+                      )
+                    : hideFilter == true
+                        ? Container()
+                        : GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                SlideTopRoute(
+                                    page: FilterView(
+                                  productList: productList,
+                                ))),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 8.0, left: 8.0),
+                              child: Center(
+                                child: TextResponsive(
+                                  'Filter',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 10,
+                                      fontFamily: 'Oswald',
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ),
+                            ),
+                          ),
               ],
             ),
           ],

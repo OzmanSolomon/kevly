@@ -46,6 +46,7 @@ class _WishlistState extends State<Wishlist> {
                   Consumer<WishlistProvider>(builder: (context, model, child) {
                     return VerticalView(
                       list: model.verticalView,
+                      showAddToBagButton: true,
                     );
                   }),
                 ]),

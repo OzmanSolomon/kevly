@@ -23,7 +23,6 @@ class _HomeState extends State<Home> {
     });
   }
 
-//! like button
   void nav(context) async {
     Provider.of<HomeProvider>(context, listen: false).navigationPage(context);
   }
