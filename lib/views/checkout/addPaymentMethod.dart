@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -149,16 +150,19 @@ class _AddPaymentMethodState extends State<AddPaymentMethod> {
                           obscureCvv: true,
                           obscureNumber: true,
                           cardNumberDecoration: const InputDecoration(
+                            errorStyle: TextStyle(fontSize: 9),
                             border: OutlineInputBorder(),
                             labelText: 'Number',
                             hintText: 'XXXX XXXX XXXX XXXX',
                           ),
                           expiryDateDecoration: const InputDecoration(
+                            errorStyle: TextStyle(fontSize: 9),
                             border: OutlineInputBorder(),
                             labelText: 'Expired Date',
                             hintText: 'XX/XX',
                           ),
                           cvvCodeDecoration: const InputDecoration(
+                            errorStyle: TextStyle(fontSize: 9),
                             border: OutlineInputBorder(),
                             labelText: 'CVV',
                             hintText: 'XXX',
@@ -173,7 +177,12 @@ class _AddPaymentMethodState extends State<AddPaymentMethod> {
                     Consumer<BagProvider>(builder: (context, provider, child) {
                       return Center(
                         child: GestureDetector(
-                          onTap: () => provider.saveCard(context),
+                          onTap: () {
+                            if (provider.creditFormKey.currentState
+                                .validate()) {
+                              provider.saveCard(context);
+                            }
+                          },
                           child: ContainerResponsive(
                             padding: EdgeInsetsResponsive.all(8),
                             margin: EdgeInsetsResponsive.only(bottom: 18),
@@ -188,7 +197,7 @@ class _AddPaymentMethodState extends State<AddPaymentMethod> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    TextResponsive(
+                                    AutoSizeText(
                                       'Save card'.toUpperCase(),
                                       textAlign: TextAlign.left,
                                       style: TextStyle(

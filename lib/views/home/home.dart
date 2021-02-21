@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -97,7 +98,7 @@ class _HomeState extends State<Home> {
                                   border: Border.all(color: Colors.transparent),
                                 ),
                               ),
-                              hint: TextResponsive(
+                              hint: AutoSizeText(
                                 provider.region,
                                 style: TextStyle(
                                     fontFamily: 'GE_SS_Two_light',
@@ -164,7 +165,7 @@ class _HomeState extends State<Home> {
                                       Image.asset(provider.cates[index]['img']),
                                 ),
                               ),
-                              TextResponsive(
+                              AutoSizeText(
                                 provider.cates[index]['name'],
                                 style: TextStyle(
                                     color: Colors.black,
@@ -222,7 +223,7 @@ class _HomeState extends State<Home> {
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: TextResponsive(
+                        child: AutoSizeText(
                           'ITEMS OF THE WEEK',
                           style: TextStyle(
                               color: Colors.black,
@@ -259,7 +260,7 @@ class _HomeState extends State<Home> {
                                 ),
                                 Align(
                                   alignment: Alignment.centerLeft,
-                                  child: TextResponsive(
+                                  child: AutoSizeText(
                                     provider.weeklySliderList[
                                         provider.currentWeekly]['name'],
                                     style: TextStyle(
@@ -275,7 +276,7 @@ class _HomeState extends State<Home> {
                               alignment: Alignment.centerLeft,
                               child: Row(
                                 children: [
-                                  TextResponsive(
+                                  AutoSizeText(
                                     provider.currentWeekly < 9
                                         ? '0${provider.currentWeekly + 1}'
                                         : '${provider.currentWeekly + 1}',
@@ -285,7 +286,7 @@ class _HomeState extends State<Home> {
                                         fontFamily: 'Oswald',
                                         fontWeight: FontWeight.w500),
                                   ),
-                                  TextResponsive(
+                                  AutoSizeText(
                                     provider.weeklySliderList.length < 9
                                         ? '/ 0${provider.weeklySliderList.length}'
                                         : '/ ${provider.weeklySliderList.length}',
@@ -308,7 +309,7 @@ class _HomeState extends State<Home> {
                             SizedBoxResponsive(
                               width: 20,
                             ),
-                            TextResponsive(
+                            AutoSizeText(
                               provider.weeklySliderList[provider.currentWeekly]
                                       ['discount'] +
                                   ' USD',
@@ -321,7 +322,7 @@ class _HomeState extends State<Home> {
                             SizedBoxResponsive(
                               width: 5,
                             ),
-                            TextResponsive(
+                            AutoSizeText(
                               '\$' +
                                   provider.weeklySliderList[
                                       provider.currentWeekly]['price'] +
@@ -351,7 +352,7 @@ class _HomeState extends State<Home> {
                           ),
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: TextResponsive(
+                            child: AutoSizeText(
                               'NEW IN TOWN',
                               style: TextStyle(
                                   color: Colors.black,
@@ -366,7 +367,7 @@ class _HomeState extends State<Home> {
                         children: [
                           Padding(
                             padding: EdgeInsetsResponsive.only(top: 20),
-                            child: TextResponsive(
+                            child: AutoSizeText(
                               'View all',
                               textAlign: TextAlign.end,
                               style: TextStyle(
@@ -409,7 +410,7 @@ class _HomeState extends State<Home> {
                           ),
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: TextResponsive(
+                            child: AutoSizeText(
                               'SHOP BY THE LOOK',
                               style: TextStyle(
                                   color: Colors.black,
@@ -424,7 +425,7 @@ class _HomeState extends State<Home> {
                         children: [
                           Padding(
                             padding: EdgeInsetsResponsive.only(top: 20),
-                            child: TextResponsive(
+                            child: AutoSizeText(
                               'View all',
                               textAlign: TextAlign.end,
                               style: TextStyle(

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -94,7 +95,7 @@ class _OverLayWidgetWithLoaderState extends State<OverLayWidgetWithLoader> {
                         SizedBoxResponsive(
                           height: 15,
                         ),
-                        TextResponsive(
+                        AutoSizeText(
                           "Loading ...",
                           style: TextStyle(
                               color: Colors.white,

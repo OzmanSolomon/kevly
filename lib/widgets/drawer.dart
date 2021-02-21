@@ -1,3 +1,15 @@
+/*
+ *
+ *    *****   ******
+ *    *   *       *
+ *    *   *      *
+ *    *   *     *  
+ *    *****    *****
+ *
+ * Wrote By Osman Suliman in 2021 
+ */
+
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/providers/drawerProvider.dart';
@@ -92,7 +104,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                                       left: 12,
                                                       right: 12),
                                               alignment: Alignment.centerLeft,
-                                              child: TextResponsive(
+                                              child: AutoSizeText(
                                                 provider.items[index],
                                                 textAlign: TextAlign.right,
                                                 style: TextStyle(
@@ -112,7 +124,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                                               ? 0
                                                               : 72.0,
                                                           right: 18),
-                                                  child: TextResponsive(
+                                                  child: AutoSizeText(
                                                     index >= 6
                                                         ? provider
                                                             .items[index - 1]

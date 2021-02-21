@@ -46,7 +46,7 @@ class _SplashState extends State<Splash> {
               child: Container(
                 child: Image.asset(
                   'assets/images/splashTopCorner.png',
-                  height: 180.61.h,
+                  height: 280.61.h,
                 ),
               ),
             ),
@@ -56,7 +56,7 @@ class _SplashState extends State<Splash> {
               child: Container(
                 child: Image.asset(
                   'assets/images/splashbottomcorner.png',
-                  height: 180.61.h,
+                  height: 280.61.h,
                 ),
               ),
             ),

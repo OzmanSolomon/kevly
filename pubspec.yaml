@@ -28,7 +28,7 @@ dependencies:
   carousel_slider: ^3.0.0
   dropdown_menu: ^1.1.1
   convex_bottom_bar: 2.4.1
-
+  auto_size_text: ^2.1.0
 dev_dependencies:
   flutter_native_splash: ^0.2.9
   flutter_test:
@@ -73,3 +73,9 @@ flutter:
           weight: 300
         - asset: assets/fonts/Oswald/Oswald-SemiBold.ttf
           weight: 400
+    - family: playfairDisplay
+      fonts:
+        - asset: assets/fonts/playfairDisplay/PlayfairDisplay-Italic.ttf
+          weight: 300
+        - asset: assets/fonts/playfairDisplay/PlayfairDisplay-BoldItalic.ttf
+          weight: 500

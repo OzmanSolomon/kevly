@@ -1,7 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/base/colorConvirter.dart';
+import 'package:kyveli/core/providers/bagProvider.dart';
 import 'package:kyveli/core/providers/productDetails.dart';
 import 'package:kyveli/theme/appTheme.dart';
 import 'package:kyveli/widgets/VerticalView.dart';
@@ -111,7 +113,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           SizedBoxResponsive(
                             width: 25,
                           ),
-                          TextResponsive(
+                          AutoSizeText(
                             provider.product['status'].toUpperCase(),
                             textAlign: TextAlign.right,
                             style: TextStyle(
@@ -138,7 +140,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ),
                               SizedBoxResponsive(
                                 width: 172,
-                                child: TextResponsive(
+                                child: AutoSizeText(
                                   provider.product['name'],
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
@@ -158,7 +160,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   SizedBoxResponsive(
                                     width: 20,
                                   ),
-                                  TextResponsive(
+                                  AutoSizeText(
                                     '\$' +
                                         provider.product['discount'] +
                                         ' USD',
@@ -171,7 +173,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   SizedBoxResponsive(
                                     width: 5,
                                   ),
-                                  TextResponsive(
+                                  AutoSizeText(
                                     '\$' + provider.product['price'] + ' USD',
                                     style: TextStyle(
                                         decoration: TextDecoration.lineThrough,
@@ -199,7 +201,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ),
                           SizedBoxResponsive(
                             width: 216,
-                            child: TextResponsive(
+                            child: AutoSizeText(
                               provider.product['disc'],
                               textAlign: TextAlign.left,
                               style: TextStyle(
@@ -234,7 +236,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             SizedBoxResponsive(
                               width: 5,
                             ),
-                            TextResponsive(
+                            AutoSizeText(
                               'Size guide',
                               textAlign: TextAlign.left,
                               style: TextStyle(
@@ -264,31 +266,45 @@ class _ProductDetailsState extends State<ProductDetails> {
                         SizedBoxResponsive(
                           height: 17,
                         ),
-                        Center(
-                          child: ContainerResponsive(
-                            padding: EdgeInsetsResponsive.all(8),
-                            width: 325,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.black, width: 1)),
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextResponsive(
-                                  'ADD',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 17,
-                                      fontFamily: 'Oswald',
-                                      fontWeight: FontWeight.w500),
+                        Consumer<ProductDetialsProvider>(
+                            builder: (context, provider, child) {
+                          return Center(
+                            child: GestureDetector(
+                              onTap: () => Provider.of<BagProvider>(context,
+                                      listen: false)
+                                  .addToBag(
+                                      img: provider.product['image'],
+                                      name: provider.product['name'],
+                                      size: provider.selectedSize['value'],
+                                      price: provider.product['price'],
+                                      discount: provider.product['discount'],
+                                      desc: provider.product['disc']),
+                              child: ContainerResponsive(
+                                padding: EdgeInsetsResponsive.all(8),
+                                width: 325,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.black, width: 1)),
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    AutoSizeText(
+                                      'ADD',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 17,
+                                          fontFamily: 'Oswald',
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        }),
                         SizedBoxResponsive(
                           height: 17,
                         ),
@@ -320,7 +336,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             SizedBoxResponsive(
               width: 25,
             ),
-            TextResponsive(
+            AutoSizeText(
               'ITEM Color'.toUpperCase(),
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -419,7 +435,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             SizedBoxResponsive(
               width: 25,
             ),
-            TextResponsive(
+            AutoSizeText(
               'ITEM Size'.toUpperCase(),
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -464,7 +480,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextResponsive(
+                          AutoSizeText(
                             sizesList[index]['lable'],
                             textAlign: TextAlign.right,
                             style: TextStyle(
@@ -492,7 +508,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             SizedBoxResponsive(
               width: 25,
             ),
-            TextResponsive(
+            AutoSizeText(
               'Quantity'.toUpperCase(),
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -523,7 +539,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         borderRadius: BorderRadius.circular(360),
                         border: Border.all(color: Colors.black, width: 1)),
                     alignment: Alignment.center,
-                    child: TextResponsive(
+                    child: AutoSizeText(
                       '-',
                       textAlign: TextAlign.right,
                       style: TextStyle(
@@ -534,7 +550,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   ),
                 ),
-                TextResponsive(
+                AutoSizeText(
                   '${provider.quantity}',
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -554,7 +570,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         borderRadius: BorderRadius.circular(360),
                         border: Border.all(color: Colors.black, width: 1)),
                     alignment: Alignment.center,
-                    child: TextResponsive(
+                    child: AutoSizeText(
                       '+',
                       textAlign: TextAlign.right,
                       style: TextStyle(
@@ -565,7 +581,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   ),
                 ),
-                TextResponsive(
+                AutoSizeText(
                   '( \$${provider.total} USD )',
                   textAlign: TextAlign.right,
                   style: TextStyle(

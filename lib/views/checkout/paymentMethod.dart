@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
@@ -118,7 +119,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         child: Image.asset(cardPic),
                                       ),
                                       Center(
-                                        child: TextResponsive(
+                                        child: AutoSizeText(
                                           provider
                                                       .paymentMethods[index]
                                                           ['cardNumber']
@@ -164,7 +165,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextResponsive(
+                          AutoSizeText(
                             'ADD NEW',
                             textAlign: TextAlign.left,
                             style: TextStyle(

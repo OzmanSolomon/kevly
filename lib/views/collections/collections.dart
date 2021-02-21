@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/providers/collectionProvider.dart';
@@ -62,7 +63,7 @@ class _CustomCollectionViewState extends State<CustomCollectionView> {
                           SizedBoxResponsive(
                             width: 73,
                           ),
-                          TextResponsive(
+                          AutoSizeText(
                             'Collection',
                             textAlign: TextAlign.right,
                             style: TextStyle(
@@ -113,7 +114,7 @@ class _CustomCollectionViewState extends State<CustomCollectionView> {
                                           child: Container(
                                             margin: EdgeInsetsResponsive.only(
                                                 top: 20, left: 72.0, right: 18),
-                                            child: TextResponsive(
+                                            child: AutoSizeText(
                                               index >= 7
                                                   ? provider.items[index - 1]
                                                   : index ==

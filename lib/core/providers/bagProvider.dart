@@ -1,9 +1,20 @@
+/*
+ *
+ *    *****   ******
+ *    *   *       *
+ *    *   *      *
+ *    *   *     *  
+ *    *****    *****
+ *
+ * Wrote By Osman Suliman in 2021 
+ */
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:kyveli/views/checkout/finalCheckout.dart';
 import 'package:kyveli/widgets/navigations.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:kyveli/widgets/toasts.dart';
 
 class BagProvider extends ChangeNotifier {
   String cardNumber = '';
@@ -15,15 +26,12 @@ Jibran building, Sin el Fil, Mont Liban
 2X4W8H''';
   bool isCvvFocused = false;
   int finalCheckoutSliderIndex = 0;
-  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> checkoutScaffoldKey =
       new GlobalKey<ScaffoldState>();
-  final GlobalKey<ScaffoldState> deliveryScaffoldKey =
-      new GlobalKey<ScaffoldState>();
+
   final creditFormKey = GlobalKey<FormState>();
-  final formKey = GlobalKey<FormState>();
   final checkoutFormKey = GlobalKey<FormState>();
-  final deliveryFormKey = GlobalKey<FormState>();
+
   var deliveryMethod;
   final FocusNode firstNameFocus = FocusNode();
   var firstNameController = TextEditingController();
@@ -53,44 +61,7 @@ Jibran building, Sin el Fil, Mont Liban
   var regoinsList = [
     'LEBANON',
   ];
-  final List bagItems = [
-    {
-      'img': 'assets/images/verticalView1.png',
-      'name': 'Waist Shipping Blouse',
-      'price': '68.88',
-      'discount': '1.39000',
-      'desc': 'Dark Black - Ref. BEI289304',
-      'size': 'L',
-      'quantity': 1
-    },
-    {
-      'img': 'assets/images/verticalView2.png',
-      'name': 'Poplur shirt',
-      'price': '60',
-      'discount': '29.9900',
-      'desc': 'Dark Black - Ref. BEI289304',
-      'size': 'XL',
-      'quantity': 1
-    },
-    {
-      'img': 'assets/images/verticalView3.png',
-      'name': 'Waist Shipping Blouse',
-      'price': '68.88',
-      'discount': '1.39000',
-      'desc': 'Dark Black - Ref. BEI289304',
-      'size': 'S',
-      'quantity': 1
-    },
-    {
-      'img': 'assets/images/verticalView4.png',
-      'name': 'Poplur shirt',
-      'price': '60',
-      'discount': '29.9900',
-      'desc': 'Dark Black - Ref. BEI289304',
-      'size': 'M',
-      'quantity': 1
-    },
-  ];
+  final List bagItems = [];
   List paymentMethods = [
     {
       'type': 'amex',
@@ -146,8 +117,9 @@ Jibran building, Sin el Fil, Mont Liban
 
       items.add(new DropdownMenuItem<String>(
         value: a,
-        child: TextResponsive(
+        child: AutoSizeText(
           a,
+          maxLines: 2,
           style: TextStyle(
               color: Colors.black,
               fontSize: 15,
@@ -241,6 +213,33 @@ Jibran building, Sin el Fil, Mont Liban
     expiryDate = '';
     cvvCode = '';
     Navigator.pop(context);
+  }
+
+  addToBag({img, name, price, discount, desc, size}) {
+    bool isAdded = false;
+    bagItems.forEach((item) {
+      if (item['name'] == name) {
+        isAdded = true;
+      }
+    });
+    if (isAdded) {
+      int index = bagItems.indexWhere((item) => item['name'] == name);
+      bagItems[index]['quantity']++;
+      successToast('$name added X${bagItems[index]['quantity']}');
+    } else {
+      var myProduct = {
+        'img': img,
+        'name': name,
+        'price': price,
+        'discount': discount,
+        'desc': desc,
+        'size': size,
+        'quantity': 1
+      };
+      bagItems.add(myProduct);
+      successToast('$name added');
+    }
+    notifyListeners();
   }
 
   void onCreditCardModelChange(CreditCardModel creditCardModel) {

@@ -1,3 +1,14 @@
+/*
+ *
+ *    *****   ******
+ *    *   *       *
+ *    *   *      *
+ *    *   *     *  
+ *    *****    *****
+ *
+ * Wrote By Osman Suliman in 2021 
+ */
+
 import 'package:flutter/material.dart';
 
 class HexColor extends Color {

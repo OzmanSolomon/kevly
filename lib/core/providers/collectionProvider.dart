@@ -1,3 +1,13 @@
+/*
+ *
+ *    *****   ******
+ *    *   *       *
+ *    *   *      *
+ *    *   *     *  
+ *    *****    *****
+ *
+ * Wrote By Osman Suliman in 2021 
+ */
 import 'package:flutter/material.dart';
 import 'package:kyveli/views/collections/collectionProducts.dart';
 

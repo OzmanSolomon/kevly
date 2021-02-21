@@ -1,8 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:kyveli/core/providers/bagProvider.dart';
 import 'package:kyveli/theme/appTheme.dart';
-import 'package:kyveli/views/checkout/checkout.dart';
+import 'package:kyveli/views/checkout/recipt.dart';
 import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:kyveli/widgets/navigations.dart';
 import 'package:provider/provider.dart';
@@ -92,14 +93,14 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        TextResponsive(
+                                        AutoSizeText(
                                           'PROMO CODE',
                                           style: TextStyle(
                                               fontSize: 15,
                                               fontFamily: 'Oswald',
                                               fontWeight: FontWeight.w400),
                                         ),
-                                        TextResponsive(
+                                        AutoSizeText(
                                           Provider.of<BagProvider>(context,
                                                   listen: false)
                                               .promoCode,
@@ -124,7 +125,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                           SizedBoxResponsive(
                             width: 20,
                           ),
-                          TextResponsive(
+                          AutoSizeText(
                             'ADDRESS',
                             style: TextStyle(
                                 fontSize: 16,
@@ -144,7 +145,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                           ),
                           Consumer<BagProvider>(
                               builder: (context, provider, child) {
-                            return TextResponsive(
+                            return AutoSizeText(
                               provider.address,
                               style: TextStyle(
                                   fontSize: 13,
@@ -164,7 +165,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                           SizedBoxResponsive(
                             width: 20,
                           ),
-                          TextResponsive(
+                          AutoSizeText(
                             'Delivery',
                             style: TextStyle(
                                 fontSize: 16,
@@ -202,7 +203,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      TextResponsive(
+                                      AutoSizeText(
                                         methodsList[index]['name'],
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
@@ -211,7 +212,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                             fontFamily: 'Oswald',
                                             fontWeight: FontWeight.w300),
                                       ),
-                                      TextResponsive(
+                                      AutoSizeText(
                                         '(' + methodsList[index]['time'] + ')',
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
@@ -226,7 +227,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       left: 18.0, right: 18),
-                                  child: TextResponsive(
+                                  child: AutoSizeText(
                                     '\$' + methodsList[index]['cost'],
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
@@ -250,7 +251,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                           SizedBoxResponsive(
                             width: 20,
                           ),
-                          TextResponsive(
+                          AutoSizeText(
                             'PAYMENT METHOD',
                             style: TextStyle(
                                 fontSize: 16,
@@ -301,7 +302,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                 child: Image.asset(cardPic),
                               ),
                               Center(
-                                child: TextResponsive(
+                                child: AutoSizeText(
                                   provider.paymentMethods[index]['cardNumber']
                                               .length >
                                           8
@@ -334,7 +335,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               provider.promoCodeApplied
-                                  ? TextResponsive(
+                                  ? AutoSizeText(
                                       'Total  ' +
                                           provider.total.toStringAsFixed(2) +
                                           ' USD',
@@ -347,7 +348,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                           fontWeight: FontWeight.w300),
                                     )
                                   : Container(),
-                              TextResponsive(
+                              AutoSizeText(
                                 provider.promoCodeApplied
                                     ? 'Total  ' +
                                         provider.totalDiscount
@@ -365,7 +366,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                               SizedBoxResponsive(
                                 height: 5,
                               ),
-                              TextResponsive(
+                              AutoSizeText(
                                 '*VAT Included',
                                 style: TextStyle(
                                     color: Color(0xff8D8D8D),
@@ -383,7 +384,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                       Center(
                         child: GestureDetector(
                           onTap: () => Navigator.push(
-                              context, SlideTopRoute(page: Checkout())),
+                              context, SlideTopRoute(page: Recipt())),
                           child: ContainerResponsive(
                             padding: EdgeInsetsResponsive.all(8),
                             width: 325,
@@ -395,7 +396,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                TextResponsive(
+                                AutoSizeText(
                                   'BUY ITEMS',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
@@ -495,7 +496,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                     alignment: Alignment.centerLeft,
                     child: Container(
                       width: 90,
-                      child: TextResponsive(
+                      child: AutoSizeText(
                         provider.bagItems[provider.finalCheckoutSliderIndex]
                             ['name'],
                         style: TextStyle(
@@ -511,8 +512,9 @@ class _FinalCheckoutState extends State<FinalCheckout> {
               SizedBoxResponsive(
                 height: 5,
               ),
-              TextResponsive(
-                provider.bagItems[provider.finalCheckoutSliderIndex]['desc'],
+              AutoSizeText(
+                provider.bagItems[provider.finalCheckoutSliderIndex]['desc'] ??
+                    '',
                 style: TextStyle(
                     color: Color(0xff8D8D8D),
                     fontSize: 10,
@@ -521,30 +523,35 @@ class _FinalCheckoutState extends State<FinalCheckout> {
               ),
               Row(
                 children: [
-                  Container(
-                    height: 33,
-                    width: 33,
-                    margin: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(360),
-                        border: Border.all(color: Colors.black, width: 1)),
-                    alignment: Alignment.center,
-                    child: TextResponsive(
-                      provider.bagItems[provider.finalCheckoutSliderIndex]
-                          ['size'],
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontFamily: 'Oswald',
-                          fontWeight: FontWeight.w300),
-                    ),
-                  ),
+                  provider.bagItems[provider.finalCheckoutSliderIndex]
+                              ['size'] !=
+                          null
+                      ? Container(
+                          height: 33,
+                          width: 33,
+                          margin: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(360),
+                              border:
+                                  Border.all(color: Colors.black, width: 1)),
+                          alignment: Alignment.center,
+                          child: AutoSizeText(
+                            provider.bagItems[provider.finalCheckoutSliderIndex]
+                                ['size'],
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontFamily: 'Oswald',
+                                fontWeight: FontWeight.w300),
+                          ),
+                        )
+                      : Container(),
                   GestureDetector(
                     onTap: () => provider
                         .decreaseQuantity(provider.finalCheckoutSliderIndex),
-                    child: TextResponsive(
+                    child: AutoSizeText(
                       '<',
                       textAlign: TextAlign.right,
                       style: TextStyle(
@@ -557,7 +564,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                   SizedBox(
                     width: 5,
                   ),
-                  TextResponsive(
+                  AutoSizeText(
                     '${provider.bagItems[provider.finalCheckoutSliderIndex]['quantity']}',
                     textAlign: TextAlign.right,
                     style: TextStyle(
@@ -572,7 +579,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                   GestureDetector(
                     onTap: () => provider
                         .increaseQuantity(provider.finalCheckoutSliderIndex),
-                    child: TextResponsive(
+                    child: AutoSizeText(
                       '>',
                       textAlign: TextAlign.right,
                       style: TextStyle(
@@ -590,7 +597,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                   SizedBoxResponsive(
                     width: 20,
                   ),
-                  TextResponsive(
+                  AutoSizeText(
                     '${provider.quantity}' +
                         ' X ' +
                         provider.bagItems[provider.finalCheckoutSliderIndex]
@@ -605,7 +612,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                   SizedBoxResponsive(
                     width: 5,
                   ),
-                  TextResponsive(
+                  AutoSizeText(
                     '${provider.quantity * double.parse(provider.bagItems[provider.finalCheckoutSliderIndex]['discount'])}' +
                         ' USD',
                     style: TextStyle(

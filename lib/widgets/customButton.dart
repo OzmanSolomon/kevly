@@ -7,12 +7,12 @@
  *
  * Created on Tue Sep 01 2020   
  *
- * Copyright (c) 2020 Osman Solomon
+ * Wrote By 2020 Osman Solomon
  */
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class CustomRaisedButton extends StatelessWidget {
   final String title;
@@ -31,7 +31,7 @@ class CustomRaisedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RaisedButton(
       onPressed: onPressed,
-      child: TextResponsive(
+      child: AutoSizeText(
         title,
         style: TextStyle(
             color: fontColor, fontSize: fontSize, fontFamily: fontFamily),

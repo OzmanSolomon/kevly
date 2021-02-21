@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/base/colorConvirter.dart';
@@ -111,7 +112,7 @@ class _FilterViewState extends State<FilterView> {
             SizedBoxResponsive(
               width: 25,
             ),
-            TextResponsive(
+            AutoSizeText(
               'Color',
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -165,7 +166,7 @@ class _FilterViewState extends State<FilterView> {
                         SizedBoxResponsive(
                           width: 10,
                         ),
-                        TextResponsive(
+                        AutoSizeText(
                           provider.colors[index]['lable'],
                           textAlign: TextAlign.right,
                           style: TextStyle(
@@ -203,7 +204,7 @@ class _FilterViewState extends State<FilterView> {
             SizedBoxResponsive(
               width: 25,
             ),
-            TextResponsive(
+            AutoSizeText(
               'Size',
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -237,7 +238,7 @@ class _FilterViewState extends State<FilterView> {
                         provider.onSelectSize(size: provider.sizes[index]),
                     child: Row(
                       children: [
-                        TextResponsive(
+                        AutoSizeText(
                           provider.sizes[index]['lable'],
                           textAlign: TextAlign.right,
                           style: TextStyle(
@@ -275,7 +276,7 @@ class _FilterViewState extends State<FilterView> {
             SizedBoxResponsive(
               width: 25,
             ),
-            TextResponsive(
+            AutoSizeText(
               'SORT BY',
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -309,7 +310,7 @@ class _FilterViewState extends State<FilterView> {
                         provider.onSelectSort(sort: provider.sort[index]),
                     child: Row(
                       children: [
-                        TextResponsive(
+                        AutoSizeText(
                           provider.sort[index]['lable'],
                           textAlign: TextAlign.right,
                           style: TextStyle(
@@ -368,7 +369,7 @@ class FilterViewAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
           ),
-          TextResponsive(
+          AutoSizeText(
             'Filter',
             textAlign: TextAlign.right,
             style: TextStyle(
@@ -380,7 +381,7 @@ class FilterViewAppBar extends StatelessWidget implements PreferredSizeWidget {
           GestureDetector(
             onTap: () =>
                 Provider.of<FilterProvider>(context, listen: false).onClear(),
-            child: TextResponsive(
+            child: AutoSizeText(
               'CLEAR',
               textAlign: TextAlign.right,
               style: TextStyle(

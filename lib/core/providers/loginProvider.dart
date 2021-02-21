@@ -1,6 +1,16 @@
+/*
+ *
+ *    *****   ******
+ *    *   *       *
+ *    *   *      *
+ *    *   *     *  
+ *    *****    *****
+ *
+ * Wrote By Osman Suliman in 2021 
+ */
 import 'package:flutter/material.dart';
 import 'package:kyveli/core/services/userServices.dart';
-import 'package:kyveli/widgets/loading.dart';
+import 'package:kyveli/widgets/bottomNavigator.dart';
 
 class LoginProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -20,11 +30,11 @@ class LoginProvider extends ChangeNotifier {
   }
 
   void navigationPage(context) {
-    Navigator.of(context).push(
+    Navigator.of(context).pushReplacement(
       PageRouteBuilder(
           opaque: false,
           pageBuilder: (BuildContext context, _, __) {
-            return OverLayWidgetWithLoader(false);
+            return BottomNavBar();
           }),
     );
   }

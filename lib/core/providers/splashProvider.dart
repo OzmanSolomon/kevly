@@ -1,6 +1,16 @@
+/*
+ *
+ *    *****   ******
+ *    *   *       *
+ *    *   *      *
+ *    *   *     *  
+ *    *****    *****
+ *
+ * Wrote By Osman Suliman in 2021 
+ */
 import 'package:flutter/material.dart';
 import 'package:kyveli/core/services/userServices.dart';
-import 'package:kyveli/widgets/bottomNavigator.dart';
+import 'package:kyveli/views/auth/login.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 class SplashProvider extends ChangeNotifier {
@@ -22,7 +32,7 @@ class SplashProvider extends ChangeNotifier {
       PageRouteBuilder(
           opaque: false,
           pageBuilder: (BuildContext context, _, __) {
-            return BottomNavBar();
+            return Login();
           }),
     );
   }

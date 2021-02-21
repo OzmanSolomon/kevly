@@ -7,7 +7,7 @@
  *
  * Created on Tue Sep 01 2020   
  *
- * Copyright (c) 2020 Osman Solomon
+ * Wrote By 2020 Osman Solomon
  */
 
 import 'package:flutter/material.dart';

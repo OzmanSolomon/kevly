@@ -1,3 +1,13 @@
+/*
+ *
+ *    *****   ******
+ *    *   *       *
+ *    *   *      *
+ *    *   *     *  
+ *    *****    *****
+ *
+ * Wrote By Osman Suliman in 2021 
+ */
 import 'package:flutter/material.dart';
 import 'package:kyveli/widgets/loading.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -57,25 +67,25 @@ class ProductDetialsProvider extends ChangeNotifier {
         'img': 'assets/images/verticalView1.png',
         'name': 'Waist Shipping Blouse',
         'price': '68.88',
-        'discount': '1.390,00'
+        'discount': '1.390'
       },
       {
         'img': 'assets/images/verticalView2.png',
         'name': 'Poplur shirt',
         'price': '60',
-        'discount': '29.99,00'
+        'discount': '29.99'
       },
       {
         'img': 'assets/images/verticalView3.png',
         'name': 'Waist Shipping Blouse',
         'price': '68.88',
-        'discount': '1.390,00'
+        'discount': '1.390'
       },
       {
         'img': 'assets/images/verticalView4.png',
         'name': 'Poplur shirt',
         'price': '60',
-        'discount': '29.99,00'
+        'discount': '29.99'
       },
     ]
   };

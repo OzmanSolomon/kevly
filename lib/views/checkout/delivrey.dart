@@ -1,9 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kyveli/core/providers/bagProvider.dart';
 import 'package:kyveli/views/checkout/paymentMethod.dart';
 
 import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:kyveli/widgets/navigations.dart';
+import 'package:kyveli/widgets/toasts.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
@@ -39,8 +41,6 @@ class _DelivreyState extends State<Delivrey> {
       width: 375.0,
       allowFontScaling: true,
       child: Scaffold(
-        key: Provider.of<BagProvider>(context, listen: false)
-            .deliveryScaffoldKey,
         appBar: CustomAppbar(
           title: 'Delivery'.toUpperCase(),
           hideFilter: true,
@@ -51,7 +51,6 @@ class _DelivreyState extends State<Delivrey> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
               child: Form(
-                key: Provider.of<BagProvider>(context).deliveryFormKey,
                 child: Column(children: <Widget>[
                   Consumer<BagProvider>(builder: (context, provider, child) {
                     List methodsList = provider.deliveryMethods;
@@ -89,7 +88,7 @@ class _DelivreyState extends State<Delivrey> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        TextResponsive(
+                                        AutoSizeText(
                                           methodsList[index]['name'],
                                           textAlign: TextAlign.right,
                                           style: TextStyle(
@@ -100,7 +99,7 @@ class _DelivreyState extends State<Delivrey> {
                                               fontFamily: 'Oswald',
                                               fontWeight: FontWeight.w300),
                                         ),
-                                        TextResponsive(
+                                        AutoSizeText(
                                           '(' +
                                               methodsList[index]['time'] +
                                               ')',
@@ -119,7 +118,7 @@ class _DelivreyState extends State<Delivrey> {
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         left: 18.0, right: 18),
-                                    child: TextResponsive(
+                                    child: AutoSizeText(
                                       '\$' + methodsList[index]['cost'],
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
@@ -152,7 +151,7 @@ class _DelivreyState extends State<Delivrey> {
                           SizedBoxResponsive(
                             height: 20,
                           ),
-                          TextResponsive(
+                          AutoSizeText(
                             provider.promoCodeApplied
                                 ? 'Total  ' +
                                     provider.total.toStringAsFixed(2) +
@@ -169,7 +168,7 @@ class _DelivreyState extends State<Delivrey> {
                           SizedBoxResponsive(
                             height: 5,
                           ),
-                          TextResponsive(
+                          AutoSizeText(
                             '*VAT Included',
                             style: TextStyle(
                                 color: Color(0xff8D8D8D),
@@ -186,8 +185,13 @@ class _DelivreyState extends State<Delivrey> {
                   ),
                   Center(
                     child: GestureDetector(
-                      onTap: () => Navigator.push(
-                          context, SlideTopRoute(page: PaymentMethod())),
+                      onTap: () =>
+                          Provider.of<BagProvider>(context, listen: false)
+                                      .deliveryMethod !=
+                                  null
+                              ? Navigator.push(
+                                  context, SlideTopRoute(page: PaymentMethod()))
+                              : errorToast('select method'),
                       child: ContainerResponsive(
                         padding: EdgeInsetsResponsive.all(8),
                         width: 325,
@@ -198,7 +202,7 @@ class _DelivreyState extends State<Delivrey> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            TextResponsive(
+                            AutoSizeText(
                               'NEXT',
                               textAlign: TextAlign.left,
                               style: TextStyle(

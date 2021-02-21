@@ -10,7 +10,7 @@ import 'package:kyveli/core/providers/loginProvider.dart';
 import 'package:kyveli/core/providers/splashProvider.dart';
 import 'package:kyveli/core/providers/wishlist.dart';
 import 'package:kyveli/theme/appTheme.dart';
-import 'package:kyveli/widgets/bottomNavigator.dart';
+import 'package:kyveli/views/intro/splash.dart';
 import 'package:provider/provider.dart';
 
 import 'core/providers/bottomNavProvider.dart';
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Kyveli',
           theme: appTheme(),
-          home: BottomNavBar(),
+          home: Splash(),
         ),
       ),
     );

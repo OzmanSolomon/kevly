@@ -1,3 +1,14 @@
+/*
+ *
+ *    *****   ******
+ *    *   *       *
+ *    *   *      *
+ *    *   *     *  
+ *    *****    *****
+ *
+ * Wrote By Osman Suliman in 2021 
+ */
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kyveli/core/services/userServices.dart';
 import 'package:kyveli/widgets/loading.dart';
@@ -26,13 +37,13 @@ class HomeProvider extends ChangeNotifier {
       'img': 'assets/images/weeklySlider1.png',
       'name': 'Waist Shipping Blouse',
       'price': '68.88',
-      'discount': '1.390,00'
+      'discount': '1.390'
     },
     {
       'img': 'assets/images/weeklySlider2.png',
       'name': 'Poplur shirt',
       'price': '60',
-      'discount': '29.99,00'
+      'discount': '29.99'
     },
   ];
   final List verticalView = [
@@ -40,25 +51,25 @@ class HomeProvider extends ChangeNotifier {
       'img': 'assets/images/verticalView1.png',
       'name': 'Waist Shipping Blouse',
       'price': '68.88',
-      'discount': '1.390,00'
+      'discount': '1.390'
     },
     {
       'img': 'assets/images/verticalView2.png',
       'name': 'Poplur shirt',
       'price': '60',
-      'discount': '29.99,00'
+      'discount': '29.99'
     },
     {
       'img': 'assets/images/verticalView3.png',
       'name': 'Waist Shipping Blouse',
       'price': '68.88',
-      'discount': '1.390,00'
+      'discount': '1.390'
     },
     {
       'img': 'assets/images/verticalView4.png',
       'name': 'Poplur shirt',
       'price': '60',
-      'discount': '29.99,00'
+      'discount': '29.99'
     },
   ];
 
@@ -103,7 +114,7 @@ class HomeProvider extends ChangeNotifier {
 
       items.add(new DropdownMenuItem<String>(
         value: a,
-        child: TextResponsive(
+        child: AutoSizeText(
           a,
           style: TextStyle(
               color: Colors.black,

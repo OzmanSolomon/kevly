@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/views/filter/filterView.dart';
@@ -77,7 +78,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                           ),
                         ),
                       ),
-                TextResponsive(
+                AutoSizeText(
                   title.toUpperCase(),
                   style: TextStyle(
                       color: Colors.black,
@@ -90,7 +91,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                         onTap: () => onClear(),
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                          child: TextResponsive(
+                          child: AutoSizeText(
                             'CLEAR',
                             textAlign: TextAlign.right,
                             style: TextStyle(
@@ -114,7 +115,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                               padding:
                                   const EdgeInsets.only(right: 8.0, left: 8.0),
                               child: Center(
-                                child: TextResponsive(
+                                child: AutoSizeText(
                                   'Filter',
                                   style: TextStyle(
                                       color: Colors.black,

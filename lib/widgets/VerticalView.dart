@@ -1,7 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kyveli/core/providers/bagProvider.dart';
+import 'package:kyveli/core/providers/productDetails.dart';
 import 'package:kyveli/theme/appTheme.dart';
 import 'package:kyveli/views/product/productDetails.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
 import 'navigations.dart';
@@ -62,7 +66,7 @@ class VerticalView extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Container(
                           width: 90,
-                          child: TextResponsive(
+                          child: AutoSizeText(
                             list[index]['name'],
                             style: TextStyle(
                                 color: Colors.black,
@@ -82,7 +86,7 @@ class VerticalView extends StatelessWidget {
                       SizedBoxResponsive(
                         width: 20,
                       ),
-                      TextResponsive(
+                      AutoSizeText(
                         '\$' + list[index]['discount'] + ' USD',
                         style: TextStyle(
                             color: Color(0xffCECECE),
@@ -93,7 +97,7 @@ class VerticalView extends StatelessWidget {
                       SizedBoxResponsive(
                         width: 5,
                       ),
-                      TextResponsive(
+                      AutoSizeText(
                         '\$' + list[index]['price'] + ' USD',
                         style: TextStyle(
                             decoration: TextDecoration.lineThrough,
@@ -171,7 +175,7 @@ class VerticalView extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Container(
                           width: 90,
-                          child: TextResponsive(
+                          child: AutoSizeText(
                             list[index]['name'],
                             style: TextStyle(
                                 color: Colors.black,
@@ -197,7 +201,7 @@ class VerticalView extends StatelessWidget {
                           SizedBoxResponsive(
                             width: 20,
                           ),
-                          TextResponsive(
+                          AutoSizeText(
                             '\$' + list[index]['discount'] + ' USD',
                             style: TextStyle(
                                 color: Colors.black,
@@ -208,7 +212,7 @@ class VerticalView extends StatelessWidget {
                           SizedBoxResponsive(
                             width: 5,
                           ),
-                          TextResponsive(
+                          AutoSizeText(
                             '\$' + list[index]['price'] + ' USD',
                             style: TextStyle(
                                 decoration: TextDecoration.lineThrough,
@@ -229,28 +233,44 @@ class VerticalView extends StatelessWidget {
                       SizedBoxResponsive(
                         width: 20,
                       ),
-                      ContainerResponsive(
-                        padding: EdgeInsetsResponsive.all(8),
-                        width: 120,
-                        height: 34,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 1)),
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextResponsive(
-                              'ADD TO CART',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 10,
-                                  fontFamily: 'Oswald',
-                                  fontWeight: FontWeight.w500),
+                      Consumer<ProductDetialsProvider>(
+                          builder: (context, provider, child) {
+                        return GestureDetector(
+                          onTap: () {
+                            Provider.of<BagProvider>(context, listen: false)
+                                .addToBag(
+                                    img: list[index]['img'],
+                                    name: list[index]['name'],
+                                    size: list[index]['value'],
+                                    price: list[index]['price'],
+                                    discount: list[index]['discount'],
+                                    desc: list[index]['disc']);
+                          },
+                          child: ContainerResponsive(
+                            padding: EdgeInsetsResponsive.all(8),
+                            width: 120,
+                            height: 34,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 1)),
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AutoSizeText(
+                                  'ADD TO CART',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 10,
+                                      fontFamily: 'Oswald',
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
+                          ),
+                        );
+                      }),
                     ],
                   ),
                 ],

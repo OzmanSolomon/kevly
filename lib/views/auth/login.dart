@@ -1,9 +1,19 @@
+/*
+ *
+ *    *****   ******
+ *    *   *       *
+ *    *   *      *
+ *    *   *     *  
+ *    *****    *****
+ *
+ * Wrote By Osman Suliman in 2021 
+ */
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/providers/loginProvider.dart';
 import 'package:kyveli/widgets/customButton.dart';
 import 'package:kyveli/widgets/customTextField.dart';
-import 'package:kyveli/widgets/toasts.dart';
 import 'package:kyveli/widgets/validators.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -17,9 +27,6 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
-      successToast('test my toast');
-    });
   }
 
   void nav(context) async {
@@ -54,7 +61,7 @@ class _LoginState extends State<Login> {
                   Row(
                     children: [
                       SizedBoxResponsive(width: 26),
-                      TextResponsive(
+                      AutoSizeText(
                         'LET’S GET\nSTARTED',
                         style: TextStyle(
                             color: Colors.black,
@@ -107,27 +114,31 @@ class _LoginState extends State<Login> {
                   SizedBoxResponsive(
                     height: 44,
                   ),
-                  ContainerResponsive(
-                      width: 325,
-                      height: 50,
-                      child: Consumer<LoginProvider>(
-                          builder: (context, provider, child) {
-                        return CustomRaisedButton(
-                          fontColor: Color(0xffFFFFFF),
-                          fontFamily: 'GeDinarOne_Medium',
-                          fontSize: 17,
-                          onPressed: () {
-                            if (provider.formKey.currentState.validate()) {}
-                          },
-                          title: 'SIGN IN',
-                        );
-                      })),
+                  GestureDetector(
+                    child: ContainerResponsive(
+                        width: 325,
+                        height: 50,
+                        child: Consumer<LoginProvider>(
+                            builder: (context, provider, child) {
+                          return CustomRaisedButton(
+                            fontColor: Color(0xffFFFFFF),
+                            fontFamily: 'GeDinarOne_Medium',
+                            fontSize: 17,
+                            onPressed: () {
+                              if (provider.formKey.currentState.validate()) {
+                                nav(context);
+                              }
+                            },
+                            title: 'SIGN IN',
+                          );
+                        })),
+                  ),
                   SizedBoxResponsive(
                     height: 10,
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: TextResponsive(
+                    child: AutoSizeText(
                       "Have you forgotten your password ?",
                       style: TextStyle(
                           color: Colors.black,
@@ -150,7 +161,7 @@ class _LoginState extends State<Login> {
                       SizedBoxResponsive(
                         width: 18.5,
                       ),
-                      TextResponsive(
+                      AutoSizeText(
                         "Or",
                         style: TextStyle(
                             color: Colors.black,
@@ -231,7 +242,7 @@ class _LoginState extends State<Login> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextResponsive(
+                        AutoSizeText(
                           "New Member ?",
                           style: TextStyle(
                             color: Colors.black,
@@ -239,7 +250,7 @@ class _LoginState extends State<Login> {
                             fontFamily: 'Oswald',
                           ),
                         ),
-                        TextResponsive(
+                        AutoSizeText(
                           "SIGN UP",
                           style: TextStyle(
                               decoration: TextDecoration.underline,

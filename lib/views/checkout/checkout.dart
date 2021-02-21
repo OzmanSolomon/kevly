@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/providers/bagProvider.dart';
@@ -126,7 +127,7 @@ class _CheckoutState extends State<Checkout> {
                             border: Border.all(color: Colors.transparent),
                           ),
                         ),
-                        hint: TextResponsive(
+                        hint: AutoSizeText(
                           provider.region,
                           style: TextStyle(
                               fontFamily: 'GE_SS_Two_light',
@@ -144,8 +145,15 @@ class _CheckoutState extends State<Checkout> {
                   ),
                   Center(
                     child: GestureDetector(
-                      onTap: () => Navigator.push(
-                          context, SlideTopRoute(page: Delivrey())),
+                      onTap: () {
+                        // if (Provider.of<BagProvider>(context, listen: false)
+                        //     .checkoutFormKey
+                        //     .currentState
+                        //     .validate()) {
+                        Navigator.push(
+                            context, SlideTopRoute(page: Delivrey()));
+                        // }
+                      },
                       child: ContainerResponsive(
                         padding: EdgeInsetsResponsive.all(8),
                         width: 325,
@@ -156,7 +164,7 @@ class _CheckoutState extends State<Checkout> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            TextResponsive(
+                            AutoSizeText(
                               'NEXT',
                               textAlign: TextAlign.left,
                               style: TextStyle(
