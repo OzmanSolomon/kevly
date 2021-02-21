@@ -3,7 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/providers/bagProvider.dart';
 import 'package:kyveli/theme/appTheme.dart';
-import 'package:kyveli/views/order/checkout.dart';
+import 'package:kyveli/views/checkout/checkout.dart';
 import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:kyveli/widgets/navigations.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +19,8 @@ class _BagState extends State<Bag> {
   void initState() {
     super.initState();
   }
+
+  final SlidableController slidableController = SlidableController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,14 +48,16 @@ class _BagState extends State<Bag> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: Form(
               child: Column(children: <Widget>[
-                TextResponsive(
-                  '3 items',
-                  style: TextStyle(
-                      color: Color(0xff8D8D8D),
-                      fontSize: 14,
-                      fontFamily: 'Oswald',
-                      fontWeight: FontWeight.w300),
-                ),
+                Consumer<BagProvider>(builder: (context, provider, child) {
+                  return TextResponsive(
+                    '${provider.bagItems.length} items',
+                    style: TextStyle(
+                        color: Color(0xff8D8D8D),
+                        fontSize: 14,
+                        fontFamily: 'Oswald',
+                        fontWeight: FontWeight.w300),
+                  );
+                }),
                 SizedBox(
                   height: 20,
                 ),
@@ -74,6 +78,7 @@ class _BagState extends State<Bag> {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Slidable(
+                                    controller: slidableController,
                                     actionPane: SlidableDrawerActionPane(),
                                     actionExtentRatio: 0.25,
                                     secondaryActions: <Widget>[
@@ -85,7 +90,8 @@ class _BagState extends State<Bag> {
                                           width: 23.44,
                                           height: 29.65,
                                         ),
-                                        onTap: () => provider.deleteProduct(),
+                                        onTap: () =>
+                                            provider.deleteProduct(index),
                                       ),
                                     ],
                                     child: Row(
@@ -296,6 +302,10 @@ class _BagState extends State<Bag> {
                                       height: 40,
                                       width: width - 180,
                                       child: TextField(
+                                        controller: Provider.of<BagProvider>(
+                                                context,
+                                                listen: false)
+                                            .promoCodeController,
                                         decoration: new InputDecoration(
                                             border: new OutlineInputBorder(
                                               borderRadius:

@@ -19,7 +19,7 @@ class VerticalView extends StatelessWidget {
         padding: EdgeInsetsResponsive.all(0.0),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 160 / 290,
+          childAspectRatio: showAddToBagButton == true ? 160 / 320 : 160 / 290,
         ),
         itemCount: list.length,
         scrollDirection: Axis.vertical,

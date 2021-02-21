@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kyveli/core/providers/bagProvider.dart';
+import 'package:kyveli/views/checkout/paymentMethod.dart';
+
 import 'package:kyveli/widgets/customAppbar.dart';
+import 'package:kyveli/widgets/navigations.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
@@ -183,8 +186,8 @@ class _DelivreyState extends State<Delivrey> {
                   ),
                   Center(
                     child: GestureDetector(
-                      // onTap: () => Navigator.push(
-                      //     context, SlideTopRoute(page: Delivrey())),
+                      onTap: () => Navigator.push(
+                          context, SlideTopRoute(page: PaymentMethod())),
                       child: ContainerResponsive(
                         padding: EdgeInsetsResponsive.all(8),
                         width: 325,
