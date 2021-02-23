@@ -15,6 +15,7 @@ import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:kyveli/views/checkout/finalCheckout.dart';
 import 'package:kyveli/widgets/navigations.dart';
 import 'package:kyveli/widgets/toasts.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BagProvider extends ChangeNotifier {
   String cardNumber = '';
@@ -122,7 +123,7 @@ Jibran building, Sin el Fil, Mont Liban
           maxLines: 2,
           style: TextStyle(
               color: Colors.black,
-              fontSize: 15,
+              fontSize: ScreenUtil().setSp(15),
               fontFamily: 'Oswald',
               fontWeight: FontWeight.w300),
         ),
@@ -212,6 +213,7 @@ Jibran building, Sin el Fil, Mont Liban
     cardHolderName = '';
     expiryDate = '';
     cvvCode = '';
+    notifyListeners();
     Navigator.pop(context);
   }
 

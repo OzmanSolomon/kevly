@@ -59,93 +59,125 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 children: [
                   Column(children: <Widget>[
                     Consumer<BagProvider>(builder: (context, provider, child) {
-                      return ListView.builder(
-                          itemCount: provider.paymentMethods.length,
-                          shrinkWrap: true,
-                          itemBuilder: (BuildContext context, int index) {
-                            String cardPic;
-                            switch (provider.paymentMethods[index]['type']) {
-                              case 'amex':
-                                cardPic = 'assets/images/amex.png';
-                                break;
-                              case 'master':
-                                cardPic = 'assets/images/master.png';
+                      return provider.paymentMethods.isNotEmpty
+                          ? ListView.builder(
+                              itemCount: provider.paymentMethods.length,
+                              shrinkWrap: true,
+                              itemBuilder: (BuildContext context, int index) {
+                                String cardPic;
+                                switch (provider.paymentMethods[index]
+                                    ['type']) {
+                                  case 'amex':
+                                    cardPic = 'assets/images/amex.png';
+                                    break;
+                                  case 'master':
+                                    cardPic = 'assets/images/master.png';
 
-                                break;
-                              case 'paypal':
-                                cardPic = 'assets/images/paypal.png';
+                                    break;
+                                  case 'paypal':
+                                    cardPic = 'assets/images/paypal.png';
 
-                                break;
-                              case 'visa':
-                                cardPic = 'assets/images/visa.png';
+                                    break;
+                                  case 'visa':
+                                    cardPic = 'assets/images/visa.png';
 
-                                break;
-                              default:
-                            }
-                            return Slidable(
-                              actionPane: SlidableDrawerActionPane(),
-                              actionExtentRatio: 0.25,
-                              controller: slidableController,
-                              secondaryActions: <Widget>[
-                                IconSlideAction(
-                                  caption: '',
-                                  color: Color(0xffC30404),
-                                  iconWidget: SvgPicture.asset(
-                                    'assets/images/trash.svg',
-                                    width: 23.44,
-                                    height: 29.65,
-                                  ),
-                                  onTap: () => provider.deleteGateway(index),
-                                ),
-                              ],
-                              child: GestureDetector(
-                                onTap: () =>
-                                    provider.navigateToFinal(context, index),
-                                child: Container(
-                                  height: 70,
-                                  width: width - 20,
-                                  margin: EdgeInsets.all(20),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.black, width: 1)),
-                                  alignment: Alignment.center,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(18.0),
-                                        child: Image.asset(cardPic),
+                                    break;
+                                  default:
+                                }
+                                return Slidable(
+                                  actionPane: SlidableDrawerActionPane(),
+                                  actionExtentRatio: 0.25,
+                                  controller: slidableController,
+                                  secondaryActions: <Widget>[
+                                    IconSlideAction(
+                                      caption: '',
+                                      color: Color(0xffC30404),
+                                      iconWidget: SvgPicture.asset(
+                                        'assets/images/trash.svg',
+                                        width: 23.44,
+                                        height: 29.65,
                                       ),
-                                      Center(
-                                        child: AutoSizeText(
-                                          provider
+                                      onTap: () =>
+                                          provider.deleteGateway(index),
+                                    ),
+                                  ],
+                                  child: GestureDetector(
+                                    onTap: () => provider.navigateToFinal(
+                                        context, index),
+                                    child: ContainerResponsive(
+                                      height: 70,
+                                      width: width - 20,
+                                      margin: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color: Colors.black, width: 1)),
+                                      alignment: Alignment.center,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(18.0),
+                                            child: Image.asset(
+                                              cardPic,
+                                              width: 40.w,
+                                              height: 40.h,
+                                            ),
+                                          ),
+                                          Center(
+                                            child: AutoSizeText(
+                                              provider
+                                                          .paymentMethods[index]
+                                                              ['cardNumber']
+                                                          .length >
+                                                      8
+                                                  ? provider
                                                       .paymentMethods[index]
                                                           ['cardNumber']
-                                                      .length >
-                                                  8
-                                              ? provider.paymentMethods[index]
-                                                      ['cardNumber']
-                                                  .replaceRange(
-                                                      0, 8, '• • • • • • • • ')
-                                              : provider.paymentMethods[index]
-                                                  ['cardNumber'],
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 17,
-                                              fontFamily: 'Oswald',
-                                              fontWeight: FontWeight.w400),
-                                        ),
+                                                      .replaceRange(0, 8,
+                                                          '• • • • • • • • ')
+                                                  : provider
+                                                          .paymentMethods[index]
+                                                      ['cardNumber'],
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize:
+                                                      ScreenUtil().setSp(17),
+                                                  fontFamily: 'Oswald',
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ),
+                                          ContainerResponsive()
+                                        ],
                                       ),
-                                      Container()
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                );
+                              })
+                          : Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBoxResponsive(
+                                    height: 200,
+                                  ),
+                                  AutoSizeText(
+                                    'You Haven\'t Payment \n Method Yet',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: ScreenUtil().setSp(22),
+                                        fontFamily: 'Oswald',
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBoxResponsive(
+                                    height: 100,
+                                  ),
+                                ],
                               ),
                             );
-                          });
                     }),
                     SizedBoxResponsive(
                       height: 81,
@@ -170,7 +202,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 17,
+                                fontSize: ScreenUtil().setSp(17),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w500),
                           ),
@@ -197,7 +229,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
             title,
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 14,
+                fontSize: ScreenUtil().setSp(14),
                 fontFamily: 'Oswald',
                 fontWeight: FontWeight.w300),
           ),

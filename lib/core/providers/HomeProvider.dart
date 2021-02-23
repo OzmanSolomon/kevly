@@ -118,7 +118,7 @@ class HomeProvider extends ChangeNotifier {
           a,
           style: TextStyle(
               color: Colors.black,
-              fontSize: 15,
+              fontSize: ScreenUtil().setSp(15),
               fontFamily: 'Oswald',
               fontWeight: FontWeight.w300),
         ),
@@ -154,6 +154,7 @@ class HomeProvider extends ChangeNotifier {
         .map((item) => ContainerResponsive(
               width: 280,
               height: 165,
+              margin: EdgeInsetsResponsive.only(left: 10),
               child: ClipRRect(
                 borderRadius: new BorderRadius.all(
                   Radius.circular(10),

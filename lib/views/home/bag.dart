@@ -25,7 +25,6 @@ class _BagState extends State<Bag> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
     ResponsiveWidgets.init(
       context,
       height: 812.0,
@@ -53,7 +52,7 @@ class _BagState extends State<Bag> {
                       '${provider.bagItems.length} items',
                       style: TextStyle(
                           color: Color(0xff8D8D8D),
-                          fontSize: 14,
+                          fontSize: ScreenUtil().setSp(14),
                           fontFamily: 'Oswald',
                           fontWeight: FontWeight.w300),
                     );
@@ -101,7 +100,8 @@ class _BagState extends State<Bag> {
                                             textAlign: TextAlign.right,
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 15,
+                                                fontSize:
+                                                    ScreenUtil().setSp(15),
                                                 fontFamily: 'Oswald',
                                                 fontWeight: FontWeight.w500),
                                           ),
@@ -115,9 +115,9 @@ class _BagState extends State<Bag> {
                                             left: 25, right: 25),
                                         child: Row(
                                           children: [
-                                            Container(
+                                            ContainerResponsive(
                                               height: 40,
-                                              width: width - 180,
+                                              width: 200,
                                               child: TextField(
                                                 controller:
                                                     Provider.of<BagProvider>(
@@ -135,10 +135,8 @@ class _BagState extends State<Bag> {
                                                       ),
                                                     ),
                                                     suffixText: 'USD',
-                                                    suffixStyle:
-                                                        const TextStyle(
-                                                            color:
-                                                                Colors.grey)),
+                                                    suffixStyle: TextStyle(
+                                                        color: Colors.grey)),
                                               ),
                                             ),
                                             Consumer<BagProvider>(builder:
@@ -146,7 +144,7 @@ class _BagState extends State<Bag> {
                                               return GestureDetector(
                                                 onTap: () =>
                                                     provider.applyPromo(),
-                                                child: Container(
+                                                child: ContainerResponsive(
                                                     width: 100,
                                                     height: 40,
                                                     color: Color(0xff292F33),
@@ -155,7 +153,8 @@ class _BagState extends State<Bag> {
                                                       'Redeem',
                                                       style: TextStyle(
                                                           color: Colors.white,
-                                                          fontSize: 15,
+                                                          fontSize: ScreenUtil()
+                                                              .setSp(15),
                                                           fontFamily: 'Oswald',
                                                           fontWeight:
                                                               FontWeight.w500),
@@ -191,12 +190,13 @@ class _BagState extends State<Bag> {
                                                         .lineThrough,
                                                     color:
                                                         appTheme().accentColor,
-                                                    fontSize: 10,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(10),
                                                     fontFamily: 'Oswald',
                                                     fontWeight:
                                                         FontWeight.w300),
                                               )
-                                            : Container(),
+                                            : ContainerResponsive(),
                                         AutoSizeText(
                                           provider.promoCodeApplied
                                               ? 'Total  ' +
@@ -209,7 +209,7 @@ class _BagState extends State<Bag> {
                                                   ' USD',
                                           style: TextStyle(
                                               color: Colors.black,
-                                              fontSize: 16,
+                                              fontSize: ScreenUtil().setSp(16),
                                               fontFamily: 'Oswald',
                                               fontWeight: FontWeight.w500),
                                         ),
@@ -220,7 +220,7 @@ class _BagState extends State<Bag> {
                                           '*VAT Included',
                                           style: TextStyle(
                                               color: Color(0xff8D8D8D),
-                                              fontSize: 14,
+                                              fontSize: ScreenUtil().setSp(14),
                                               fontFamily: 'Oswald',
                                               fontWeight: FontWeight.w300),
                                         ),
@@ -252,7 +252,8 @@ class _BagState extends State<Bag> {
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 17,
+                                                fontSize:
+                                                    ScreenUtil().setSp(17),
                                                 fontFamily: 'Oswald',
                                                 fontWeight: FontWeight.w500),
                                           ),
@@ -288,7 +289,7 @@ class _BagState extends State<Bag> {
                                 'No Item In The Bag',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 22,
+                                    fontSize: ScreenUtil().setSp(22),
                                     fontFamily: 'Oswald',
                                     fontWeight: FontWeight.w500),
                               ),
@@ -345,13 +346,13 @@ class _BagState extends State<Bag> {
                     children: [
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Container(
+                        child: ContainerResponsive(
                           width: 90,
                           child: AutoSizeText(
                             provider.bagItems[index]['name'],
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
+                                fontSize: ScreenUtil().setSp(14),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w500),
                           ),
@@ -366,14 +367,14 @@ class _BagState extends State<Bag> {
                     provider.bagItems[index]['desc'] ?? '',
                     style: TextStyle(
                         color: Color(0xff8D8D8D),
-                        fontSize: 10,
+                        fontSize: ScreenUtil().setSp(10),
                         fontFamily: 'Oswald',
                         fontWeight: FontWeight.w300),
                   ),
                   Row(
                     children: [
                       provider.bagItems[index]['size'] != null
-                          ? Container(
+                          ? ContainerResponsive(
                               height: 33,
                               width: 33,
                               margin: EdgeInsets.all(20),
@@ -388,12 +389,12 @@ class _BagState extends State<Bag> {
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 13,
+                                    fontSize: ScreenUtil().setSp(13),
                                     fontFamily: 'Oswald',
                                     fontWeight: FontWeight.w300),
                               ),
                             )
-                          : Container(),
+                          : ContainerResponsive(),
                       GestureDetector(
                         onTap: () => provider.decreaseQuantity(index),
                         child: AutoSizeText(
@@ -401,7 +402,7 @@ class _BagState extends State<Bag> {
                           textAlign: TextAlign.right,
                           style: TextStyle(
                               color: Colors.black,
-                              fontSize: 10,
+                              fontSize: ScreenUtil().setSp(10),
                               fontFamily: 'Oswald',
                               fontWeight: FontWeight.w300),
                         ),
@@ -414,7 +415,7 @@ class _BagState extends State<Bag> {
                         textAlign: TextAlign.right,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12,
+                            fontSize: ScreenUtil().setSp(12),
                             fontFamily: 'Oswald',
                             fontWeight: FontWeight.w500),
                       ),
@@ -428,7 +429,7 @@ class _BagState extends State<Bag> {
                           textAlign: TextAlign.right,
                           style: TextStyle(
                               color: Colors.black,
-                              fontSize: 10,
+                              fontSize: ScreenUtil().setSp(10),
                               fontFamily: 'Oswald',
                               fontWeight: FontWeight.w300),
                         ),
@@ -448,7 +449,7 @@ class _BagState extends State<Bag> {
                             ' USD',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12,
+                            fontSize: ScreenUtil().setSp(12),
                             fontFamily: 'Oswald',
                             fontWeight: FontWeight.w300),
                       ),
@@ -460,7 +461,7 @@ class _BagState extends State<Bag> {
                             ' USD',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12,
+                            fontSize: ScreenUtil().setSp(12),
                             fontFamily: 'Oswald',
                             fontWeight: FontWeight.w500),
                       ),
@@ -476,7 +477,7 @@ class _BagState extends State<Bag> {
         ),
       );
     } catch (e) {
-      return Container();
+      return ContainerResponsive();
     }
   }
 }

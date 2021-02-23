@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kyveli/core/base/consts.dart';
 import 'package:kyveli/core/providers/bagProvider.dart';
 import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:kyveli/widgets/navigations.dart';
@@ -93,7 +94,7 @@ class _CheckoutState extends State<Checkout> {
                         'Country *',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 14,
+                            fontSize: ScreenUtil().setSp(14),
                             fontFamily: 'Oswald',
                             fontWeight: FontWeight.w300),
                       ),
@@ -130,8 +131,8 @@ class _CheckoutState extends State<Checkout> {
                         hint: AutoSizeText(
                           provider.region,
                           style: TextStyle(
-                              fontFamily: 'GE_SS_Two_light',
-                              fontSize: (12),
+                              fontFamily: 'Oswald',
+                              fontSize: ScreenUtil().setSp(12),
                               color: Colors.black),
                         ),
                         onChanged: (v) {
@@ -146,13 +147,14 @@ class _CheckoutState extends State<Checkout> {
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        // if (Provider.of<BagProvider>(context, listen: false)
-                        //     .checkoutFormKey
-                        //     .currentState
-                        //     .validate()) {
-                        Navigator.push(
-                            context, SlideTopRoute(page: Delivrey()));
-                        // }
+                        if (!isRelease ||
+                            Provider.of<BagProvider>(context, listen: false)
+                                .checkoutFormKey
+                                .currentState
+                                .validate()) {
+                          Navigator.push(
+                              context, SlideTopRoute(page: Delivrey()));
+                        }
                       },
                       child: ContainerResponsive(
                         padding: EdgeInsetsResponsive.all(8),
@@ -169,7 +171,7 @@ class _CheckoutState extends State<Checkout> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 17,
+                                  fontSize: ScreenUtil().setSp(17),
                                   fontFamily: 'Oswald',
                                   fontWeight: FontWeight.w500),
                             ),
@@ -200,7 +202,7 @@ class _CheckoutState extends State<Checkout> {
             title,
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 14,
+                fontSize: ScreenUtil().setSp(14),
                 fontFamily: 'Oswald',
                 fontWeight: FontWeight.w300),
           ),

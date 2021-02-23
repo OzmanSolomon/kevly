@@ -30,7 +30,6 @@ class _SalesState extends State<Sales> {
       width: 375.0,
       allowFontScaling: true,
       child: Scaffold(
-        key: Provider.of<SalesProvider>(context, listen: false).scaffoldKey,
         appBar: CustomAppbar(
           productList:
               Provider.of<SalesProvider>(context, listen: false).verticalView,
@@ -41,16 +40,13 @@ class _SalesState extends State<Sales> {
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
-              child: Form(
-                key: Provider.of<SalesProvider>(context, listen: false).formKey,
-                child: Column(children: <Widget>[
-                  Consumer<SalesProvider>(builder: (context, provider, child) {
-                    return VerticalView(
-                      list: provider.verticalView,
-                    );
-                  }),
-                ]),
-              ),
+              child: Column(children: <Widget>[
+                Consumer<SalesProvider>(builder: (context, provider, child) {
+                  return VerticalView(
+                    list: provider.verticalView,
+                  );
+                }),
+              ]),
             ),
           ),
         ),

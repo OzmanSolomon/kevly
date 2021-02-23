@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:kyveli/core/providers/filterProductsProvider.dart';
+import 'package:kyveli/core/providers/collectionProductsProvider.dart';
 import 'package:kyveli/widgets/VerticalView.dart';
 import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
-class FilterProducts extends StatefulWidget {
-  final List productList;
-  FilterProducts({@required this.productList});
+class CollectionProduct extends StatefulWidget {
+  final String title;
+  CollectionProduct({@required this.title});
   @override
-  _FilterProductsState createState() => _FilterProductsState();
+  _CollectionProductState createState() => _CollectionProductState();
 }
 
-class _FilterProductsState extends State<FilterProducts> {
+class _CollectionProductState extends State<CollectionProduct> {
   @override
   void initState() {
     super.initState();
@@ -32,30 +32,27 @@ class _FilterProductsState extends State<FilterProducts> {
       width: 375.0,
       allowFontScaling: true,
       child: Scaffold(
-        key: Provider.of<FilterProductsProvider>(context, listen: false)
+        key: Provider.of<CollectionProductsProvider>(context, listen: false)
             .scaffoldKey,
         appBar: CustomAppbar(
-          productList: [],
-          hideFilter: true,
-          title: 'Filter',
+          productList:
+              Provider.of<CollectionProductsProvider>(context, listen: false)
+                  .verticalView,
+          title: widget.title,
           isBackButton: true,
         ),
         body: SafeArea(
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
-              child: Form(
-                key: Provider.of<FilterProductsProvider>(context, listen: false)
-                    .formKey,
-                child: Column(children: <Widget>[
-                  Consumer<FilterProductsProvider>(
-                      builder: (context, provider, child) {
-                    return VerticalView(
-                      list: widget.productList,
-                    );
-                  }),
-                ]),
-              ),
+              child: Column(children: <Widget>[
+                Consumer<CollectionProductsProvider>(
+                    builder: (context, provider, child) {
+                  return VerticalView(
+                    list: provider.verticalView,
+                  );
+                }),
+              ]),
             ),
           ),
         ),

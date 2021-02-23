@@ -29,7 +29,6 @@ class _WishlistState extends State<Wishlist> {
       width: 375.0,
       allowFontScaling: true,
       child: Scaffold(
-        key: Provider.of<WishlistProvider>(context, listen: false).scaffoldKey,
         appBar: CustomAppbar(
           productList: Provider.of<WishlistProvider>(context, listen: false)
               .verticalView,
@@ -40,17 +39,14 @@ class _WishlistState extends State<Wishlist> {
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
-              child: Form(
-                key: Provider.of<WishlistProvider>(context).formKey,
-                child: Column(children: <Widget>[
-                  Consumer<WishlistProvider>(builder: (context, model, child) {
-                    return VerticalView(
-                      list: model.verticalView,
-                      showAddToBagButton: true,
-                    );
-                  }),
-                ]),
-              ),
+              child: Column(children: <Widget>[
+                Consumer<WishlistProvider>(builder: (context, model, child) {
+                  return VerticalView(
+                    list: model.verticalView,
+                    showAddToBagButton: true,
+                  );
+                }),
+              ]),
             ),
           ),
         ),

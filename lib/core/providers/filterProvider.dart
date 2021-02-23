@@ -9,6 +9,8 @@
  * Wrote By Osman Suliman in 2021 
  */
 import 'package:flutter/material.dart';
+import 'package:kyveli/views/filter/productsView.dart';
+import 'package:kyveli/widgets/navigations.dart';
 
 class FilterProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -16,6 +18,7 @@ class FilterProvider extends ChangeNotifier {
   Map selectedColor;
   Map selectedSize;
   Map selectedSort;
+  List filteredList = [];
   List<Map> colors = [
     {'lable': 'White', 'value': '#FFFFFF'},
     {'lable': 'Yellow', 'value': '#FFE764'},
@@ -39,6 +42,16 @@ class FilterProvider extends ChangeNotifier {
     {'lable': 'NEW IN', 'value': 'NEW IN'},
     {'lable': 'PRICE high to low', 'value': 'PRICE high to low'},
   ];
+  applyFilter(List products, context) {
+    Navigator.push(
+        context,
+        SlideTopRoute(
+            page: ProductsView(
+          title: 'Filter',
+          productList: products,
+        )));
+  }
+
   void onSelectColor({@required color}) {
     selectedColor = selectedColor == color ? null : color;
     notifyListeners();

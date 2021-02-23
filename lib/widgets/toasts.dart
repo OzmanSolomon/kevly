@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 errorToast(txt) {
   Fluttertoast.showToast(
@@ -9,7 +10,7 @@ errorToast(txt) {
       timeInSecForIosWeb: 1,
       backgroundColor: Colors.red,
       textColor: Colors.white,
-      fontSize: 16.0);
+      fontSize: ScreenUtil().setSp(16.0));
 }
 
 successToast(txt) {
@@ -20,5 +21,5 @@ successToast(txt) {
       timeInSecForIosWeb: 1,
       backgroundColor: Color(0xffF05F96),
       textColor: Colors.white,
-      fontSize: 16.0);
+      fontSize: ScreenUtil().setSp(16.0));
 }

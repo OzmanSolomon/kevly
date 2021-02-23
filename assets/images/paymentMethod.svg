@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="31.081" height="22.152" viewBox="0 0 31.081 22.152">
+  <g id="credit-card" transform="translate(0.1 -73.924)">
+    <g id="Group_1391" data-name="Group 1391" transform="translate(0 74.024)">
+      <g id="Group_1390" data-name="Group 1390" transform="translate(0 0)">
+        <path id="Path_23242" data-name="Path 23242" d="M29.393,74.024H1.488A1.493,1.493,0,0,0,0,75.512V94.488a1.493,1.493,0,0,0,1.488,1.488h27.9a1.493,1.493,0,0,0,1.488-1.488V75.512A1.493,1.493,0,0,0,29.393,74.024ZM1.116,75.512a.377.377,0,0,1,.372-.372h27.9a.377.377,0,0,1,.372.372v1.86H1.116ZM29.765,94.488a.377.377,0,0,1-.372.372H1.488a.377.377,0,0,1-.372-.372V82.954H29.765Zm0-12.65H1.116V78.489H29.765v3.349Z" transform="translate(0 -74.024)" fill="#333" stroke="#000" stroke-width="0.2"/>
+      </g>
+    </g>
+    <g id="Group_1393" data-name="Group 1393" transform="translate(17.487 86.674)">
+      <g id="Group_1392" data-name="Group 1392" transform="translate(0 0)">
+        <path id="Path_23243" data-name="Path 23243" d="M297.555,283.758a3.152,3.152,0,0,0-2.232.923,3.163,3.163,0,1,0,0,4.479,3.162,3.162,0,1,0,2.232-5.4Zm0,5.209a2.033,2.033,0,0,1-1.444-.6,1.116,1.116,0,0,0-1.576,0,2.046,2.046,0,1,1,0-2.9,1.116,1.116,0,0,0,1.576,0,2.046,2.046,0,1,1,1.444,3.5Z" transform="translate(-289.928 -283.758)" fill="#333" stroke="#000" stroke-width="0.2"/>
+      </g>
+    </g>
+    <g id="Group_1395" data-name="Group 1395" transform="translate(2.79 87.79)">
+      <g id="Group_1394" data-name="Group 1394" transform="translate(0 0)">
+        <path id="Path_23244" data-name="Path 23244" d="M55.753,302.265h-8.93a.558.558,0,0,0,0,1.116h8.93a.558.558,0,0,0,0-1.116Z" transform="translate(-46.265 -302.265)" fill="#333" stroke="#000" stroke-width="0.2"/>
+      </g>
+    </g>
+    <g id="Group_1397" data-name="Group 1397" transform="translate(2.79 90.395)">
+      <g id="Group_1396" data-name="Group 1396" transform="translate(0 0)">
+        <path id="Path_23245" data-name="Path 23245" d="M50.917,345.445H46.823a.558.558,0,1,0,0,1.116h4.093a.558.558,0,1,0,0-1.116Z" transform="translate(-46.265 -345.445)" fill="#333" stroke="#000" stroke-width="0.2"/>
+      </g>
+    </g>
+  </g>
+</svg>

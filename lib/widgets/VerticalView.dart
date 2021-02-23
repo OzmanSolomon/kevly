@@ -17,21 +17,49 @@ class VerticalView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-        primary: false,
-        shrinkWrap: true,
-        padding: EdgeInsetsResponsive.all(0.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: showAddToBagButton == true ? 160 / 320 : 160 / 290,
-        ),
-        itemCount: list.length,
-        scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) {
-          return showAddToBagButton == true
-              ? withAddToBag(index, context)
-              : withoutAddToBag(index, context);
-        });
+    return list.isNotEmpty
+        ? GridView.builder(
+            primary: false,
+            shrinkWrap: true,
+            padding: EdgeInsetsResponsive.all(0.0),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio:
+                  showAddToBagButton == true ? 160.w / 360.h : 160.w / 280.h,
+            ),
+            itemCount: list.length,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              return showAddToBagButton == true
+                  ? withAddToBag(index, context)
+                  : withoutAddToBag(index, context);
+            })
+        : Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBoxResponsive(
+                  height: 150,
+                ),
+                Icon(
+                  Icons.sentiment_dissatisfied_outlined,
+                  size: 80,
+                  color: Theme.of(context).accentColor,
+                ),
+                SizedBoxResponsive(
+                  height: 100,
+                ),
+                AutoSizeText(
+                  'No Product Found',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: ScreenUtil().setSp(22),
+                      fontFamily: 'Oswald',
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
+          );
   }
 
   Padding withoutAddToBag(int index, BuildContext context) {
@@ -52,6 +80,8 @@ class VerticalView extends StatelessWidget {
                     child: Image.asset(
                       list[index]['img'],
                       fit: BoxFit.cover,
+                      width: 160.w,
+                      height: 220.h,
                     ),
                   ),
                   SizedBoxResponsive(
@@ -64,13 +94,13 @@ class VerticalView extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Container(
+                        child: ContainerResponsive(
                           width: 90,
                           child: AutoSizeText(
                             list[index]['name'],
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
+                                fontSize: ScreenUtil().setSp(14),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w500),
                           ),
@@ -90,7 +120,7 @@ class VerticalView extends StatelessWidget {
                         '\$' + list[index]['discount'] + ' USD',
                         style: TextStyle(
                             color: Color(0xffCECECE),
-                            fontSize: 10,
+                            fontSize: ScreenUtil().setSp(10),
                             fontFamily: 'Oswald',
                             fontWeight: FontWeight.w500),
                       ),
@@ -102,7 +132,7 @@ class VerticalView extends StatelessWidget {
                         style: TextStyle(
                             decoration: TextDecoration.lineThrough,
                             color: appTheme().accentColor,
-                            fontSize: 10,
+                            fontSize: ScreenUtil().setSp(10),
                             fontFamily: 'Oswald',
                             fontWeight: FontWeight.w500),
                       ),
@@ -117,7 +147,7 @@ class VerticalView extends StatelessWidget {
             top: 4,
             child: GestureDetector(
               onTap: () {},
-              child: Container(
+              child: ContainerResponsive(
                 padding: EdgeInsetsResponsive.all(8),
                 width: 36,
                 height: 36,
@@ -127,8 +157,8 @@ class VerticalView extends StatelessWidget {
                 ),
                 child: SvgPicture.asset(
                   'assets/images/wishlistIcon.svg',
-                  width: 18,
-                  height: 18,
+                  width: 18.w,
+                  height: 18.h,
                 ),
               ),
             ),
@@ -160,6 +190,8 @@ class VerticalView extends StatelessWidget {
                       child: Image.asset(
                         list[index]['img'],
                         fit: BoxFit.cover,
+                        width: 160.w,
+                        height: 220.h,
                       ),
                     ),
                   ),
@@ -173,13 +205,13 @@ class VerticalView extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Container(
+                        child: ContainerResponsive(
                           width: 90,
                           child: AutoSizeText(
                             list[index]['name'],
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
+                                fontSize: ScreenUtil().setSp(14),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w500),
                           ),
@@ -205,7 +237,7 @@ class VerticalView extends StatelessWidget {
                             '\$' + list[index]['discount'] + ' USD',
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 12,
+                                fontSize: ScreenUtil().setSp(12),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w300),
                           ),
@@ -217,7 +249,7 @@ class VerticalView extends StatelessWidget {
                             style: TextStyle(
                                 decoration: TextDecoration.lineThrough,
                                 color: appTheme().accentColor,
-                                fontSize: 10,
+                                fontSize: ScreenUtil().setSp(10),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w300),
                           ),
@@ -249,7 +281,7 @@ class VerticalView extends StatelessWidget {
                           child: ContainerResponsive(
                             padding: EdgeInsetsResponsive.all(8),
                             width: 120,
-                            height: 34,
+                            height: 44,
                             decoration: BoxDecoration(
                                 border:
                                     Border.all(color: Colors.black, width: 1)),
@@ -262,7 +294,7 @@ class VerticalView extends StatelessWidget {
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 10,
+                                      fontSize: ScreenUtil().setSp(10),
                                       fontFamily: 'Oswald',
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -282,7 +314,7 @@ class VerticalView extends StatelessWidget {
             top: 4,
             child: GestureDetector(
               onTap: () {},
-              child: Container(
+              child: ContainerResponsive(
                 padding: EdgeInsetsResponsive.all(8),
                 width: 36,
                 height: 36,
@@ -292,8 +324,8 @@ class VerticalView extends StatelessWidget {
                 ),
                 child: SvgPicture.asset(
                   'assets/images/wishlistIcon.svg',
-                  width: 18,
-                  height: 18,
+                  width: 18.w,
+                  height: 18.h,
                 ),
               ),
             ),

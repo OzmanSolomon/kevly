@@ -4,11 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/base/colorConvirter.dart';
 import 'package:kyveli/core/providers/filterProvider.dart';
 import 'package:kyveli/widgets/customButton.dart';
-import 'package:kyveli/widgets/navigations.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
-
-import 'filterProducts.dart';
 
 class FilterView extends StatefulWidget {
   final List productList;
@@ -81,14 +78,10 @@ class _FilterViewState extends State<FilterView> {
                                 return CustomRaisedButton(
                                   fontColor: Color(0xffFFFFFF),
                                   fontFamily: 'GeDinarOne_Medium',
-                                  fontSize: 17,
+                                  fontSize: ScreenUtil().setSp(17),
                                   onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        SlideTopRoute(
-                                            page: FilterProducts(
-                                          productList: widget.productList,
-                                        )));
+                                    provider.applyFilter(
+                                        widget.productList, context);
                                   },
                                   title: 'Done',
                                 );
@@ -117,7 +110,7 @@ class _FilterViewState extends State<FilterView> {
               textAlign: TextAlign.right,
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: ScreenUtil().setSp(15),
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w500),
             ),
@@ -146,7 +139,7 @@ class _FilterViewState extends State<FilterView> {
                         provider.onSelectColor(color: provider.colors[index]),
                     child: Row(
                       children: [
-                        Container(
+                        ContainerResponsive(
                           padding: EdgeInsetsResponsive.all(8),
                           width: 15,
                           height: 15,
@@ -172,7 +165,7 @@ class _FilterViewState extends State<FilterView> {
                           style: TextStyle(
                               color:
                                   isSelected ? Colors.black : Color(0xff666E74),
-                              fontSize: 13,
+                              fontSize: ScreenUtil().setSp(13),
                               fontFamily: 'Oswald',
                               fontWeight: FontWeight.w300),
                         ),
@@ -185,7 +178,7 @@ class _FilterViewState extends State<FilterView> {
                                 width: 11.58.w,
                                 height: 10.h,
                               )
-                            : Container()
+                            : ContainerResponsive()
                       ],
                     ),
                   );
@@ -209,7 +202,7 @@ class _FilterViewState extends State<FilterView> {
               textAlign: TextAlign.right,
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: ScreenUtil().setSp(15),
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w500),
             ),
@@ -244,7 +237,7 @@ class _FilterViewState extends State<FilterView> {
                           style: TextStyle(
                               color:
                                   isSelected ? Colors.black : Color(0xff666E74),
-                              fontSize: 13,
+                              fontSize: ScreenUtil().setSp(13),
                               fontFamily: 'Oswald',
                               fontWeight: FontWeight.w300),
                         ),
@@ -257,7 +250,7 @@ class _FilterViewState extends State<FilterView> {
                                 width: 11.58.w,
                                 height: 10.h,
                               )
-                            : Container()
+                            : ContainerResponsive()
                       ],
                     ),
                   );
@@ -281,7 +274,7 @@ class _FilterViewState extends State<FilterView> {
               textAlign: TextAlign.right,
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: ScreenUtil().setSp(15),
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w500),
             ),
@@ -316,7 +309,7 @@ class _FilterViewState extends State<FilterView> {
                           style: TextStyle(
                               color:
                                   isSelected ? Colors.black : Color(0xff666E74),
-                              fontSize: 13,
+                              fontSize: ScreenUtil().setSp(13),
                               fontFamily: 'Oswald',
                               fontWeight: FontWeight.w300),
                         ),
@@ -329,7 +322,7 @@ class _FilterViewState extends State<FilterView> {
                                 width: 11.58.w,
                                 height: 10.h,
                               )
-                            : Container()
+                            : ContainerResponsive()
                       ],
                     ),
                   );
@@ -374,7 +367,7 @@ class FilterViewAppBar extends StatelessWidget implements PreferredSizeWidget {
             textAlign: TextAlign.right,
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 17,
+                fontSize: ScreenUtil().setSp(17),
                 fontFamily: 'Oswald',
                 fontWeight: FontWeight.w500),
           ),
@@ -386,7 +379,7 @@ class FilterViewAppBar extends StatelessWidget implements PreferredSizeWidget {
               textAlign: TextAlign.right,
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 10,
+                  fontSize: ScreenUtil().setSp(10),
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w100),
             ),

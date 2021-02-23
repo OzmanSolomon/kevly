@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:kyveli/core/base/consts.dart';
 import 'package:kyveli/core/providers/bagProvider.dart';
 import 'package:kyveli/widgets/customAppbar.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,6 @@ class _AddPaymentMethodState extends State<AddPaymentMethod> {
       width: 375.0,
       allowFontScaling: true,
     );
-    var height = MediaQuery.of(context).size.height;
     return ResponsiveWidgets.builder(
       height: 812.0,
       width: 375.0,
@@ -52,8 +52,8 @@ class _AddPaymentMethodState extends State<AddPaymentMethod> {
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
-              child: Container(
-                height: height - 90,
+              child: ContainerResponsive(
+                // height: height - 90,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -149,37 +149,60 @@ class _AddPaymentMethodState extends State<AddPaymentMethod> {
                           themeColor: Colors.red,
                           obscureCvv: true,
                           obscureNumber: true,
-                          cardNumberDecoration: const InputDecoration(
-                            errorStyle: TextStyle(fontSize: 9),
+                          cardNumberDecoration: InputDecoration(
+                            errorStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
                             border: OutlineInputBorder(),
+                            hintStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
+                            labelStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
                             labelText: 'Number',
                             hintText: 'XXXX XXXX XXXX XXXX',
                           ),
-                          expiryDateDecoration: const InputDecoration(
-                            errorStyle: TextStyle(fontSize: 9),
+                          expiryDateDecoration: InputDecoration(
+                            errorStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
                             border: OutlineInputBorder(),
+                            hintStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
+                            labelStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
                             labelText: 'Expired Date',
                             hintText: 'XX/XX',
                           ),
-                          cvvCodeDecoration: const InputDecoration(
-                            errorStyle: TextStyle(fontSize: 9),
+                          cvvCodeDecoration: InputDecoration(
+                            errorStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
                             border: OutlineInputBorder(),
+                            hintStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
+                            labelStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
                             labelText: 'CVV',
                             hintText: 'XXX',
                           ),
-                          cardHolderDecoration: const InputDecoration(
+                          cardHolderDecoration: InputDecoration(
                             border: OutlineInputBorder(),
+                            hintStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
+                            labelStyle:
+                                TextStyle(fontSize: ScreenUtil().setSp(9)),
                             labelText: 'Card Holder',
                           ),
                         );
                       }),
                     ]),
+                    SizedBoxResponsive(
+                      height: 20,
+                    ),
                     Consumer<BagProvider>(builder: (context, provider, child) {
                       return Center(
                         child: GestureDetector(
                           onTap: () {
-                            if (provider.creditFormKey.currentState
-                                .validate()) {
+                            if (!isRelease ||
+                                provider.creditFormKey.currentState
+                                    .validate()) {
                               provider.saveCard(context);
                             }
                           },
@@ -187,7 +210,7 @@ class _AddPaymentMethodState extends State<AddPaymentMethod> {
                             padding: EdgeInsetsResponsive.all(8),
                             margin: EdgeInsetsResponsive.only(bottom: 18),
                             width: 325,
-                            height: 50,
+                            // height: 50,
                             decoration: BoxDecoration(
                                 border:
                                     Border.all(color: Colors.black, width: 1)),
@@ -202,7 +225,7 @@ class _AddPaymentMethodState extends State<AddPaymentMethod> {
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           color: Colors.black,
-                                          fontSize: 17,
+                                          fontSize: ScreenUtil().setSp(17),
                                           fontFamily: 'Oswald',
                                           fontWeight: FontWeight.w500),
                                     ),
@@ -234,7 +257,7 @@ class _AddPaymentMethodState extends State<AddPaymentMethod> {
             title,
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 14,
+                fontSize: ScreenUtil().setSp(14),
                 fontFamily: 'Oswald',
                 fontWeight: FontWeight.w300),
           ),

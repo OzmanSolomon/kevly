@@ -43,7 +43,7 @@ class _SplashState extends State<Splash> {
           children: <Widget>[
             Align(
               alignment: Alignment.topRight,
-              child: Container(
+              child: ContainerResponsive(
                 child: Image.asset(
                   'assets/images/splashTopCorner.png',
                   height: 280.61.h,
@@ -53,7 +53,7 @@ class _SplashState extends State<Splash> {
             Center(child: LoaderFetchingData()),
             Align(
               alignment: Alignment.bottomLeft,
-              child: Container(
+              child: ContainerResponsive(
                 child: Image.asset(
                   'assets/images/splashbottomcorner.png',
                   height: 280.61.h,

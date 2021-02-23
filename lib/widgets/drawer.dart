@@ -43,10 +43,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
       child: Scaffold(
         key: Provider.of<DrawerProvider>(context, listen: false).scaffoldKey,
         body: SafeArea(
-          child: GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: Form(
-              key: Provider.of<DrawerProvider>(context, listen: false).formKey,
+          child: SingleChildScrollView(
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Stack(
                 children: [
                   Column(children: <Widget>[
@@ -65,9 +64,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                       ),
                     ),
-                    Container(
+                    ContainerResponsive(
                       width: 400,
-                      height: 400,
                       child: Consumer<DrawerProvider>(
                           builder: (context, provider, child) {
                         return ListView.builder(
@@ -82,7 +80,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                 onTap: () {
                                   provider.navigationPage(context, index);
                                 },
-                                child: Container(
+                                child: ContainerResponsive(
                                   width: 50,
                                   child: index == 6 || index == 9
                                       ? Divider(
@@ -92,7 +90,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                           endIndent: 87,
                                         )
                                       : index == 3
-                                          ? Container(
+                                          ? ContainerResponsive(
                                               color:
                                                   Theme.of(context).accentColor,
                                               width: 150,
@@ -109,14 +107,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                                 textAlign: TextAlign.right,
                                                 style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 28,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(28),
                                                     fontFamily: 'Oswald',
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
                                             )
                                           : index != provider.items.length + 2
-                                              ? Container(
+                                              ? ContainerResponsive(
                                                   margin:
                                                       EdgeInsetsResponsive.only(
                                                           top: 20,
@@ -131,7 +130,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                                         : provider.items[index],
                                                     style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 28,
+                                                        fontSize: ScreenUtil()
+                                                            .setSp(28),
                                                         fontFamily: 'Oswald',
                                                         fontWeight:
                                                             FontWeight.w500),
@@ -143,7 +143,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Container(),
+                                                      ContainerResponsive(),
                                                       GestureDetector(
                                                         onTap: () {
                                                           provider
@@ -235,7 +235,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                                           ),
                                                         ),
                                                       ),
-                                                      Container(),
+                                                      ContainerResponsive(),
                                                     ],
                                                   ),
                                                 ),
@@ -250,6 +250,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     child: Image.asset(
                       'assets/images/splashTopCorner.png',
                       height: 280.61.h,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   Align(

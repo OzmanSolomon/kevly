@@ -16,16 +16,18 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     this.onClear,
     @required this.isBackButton,
     this.productList,
+    this.isCrossIcon,
   });
   final String title;
   final onClear;
   final bool showClearBtn;
+  final bool isCrossIcon;
   final bool hideFilter;
   final bool isBackButton;
   final List productList;
 
   @override
-  Size get preferredSize => Size.fromHeight(44.h);
+  Size get preferredSize => Size.fromHeight(ScreenUtil().setSp(50));
   @override
   Widget build(BuildContext context) {
     ResponsiveWidgets.init(
@@ -47,14 +49,23 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                 isBackButton
                     ? GestureDetector(
                         onTap: () => Navigator.pop(context),
-                        child: Container(
+                        child: ContainerResponsive(
                           height: 40.5.h,
-                          width: 40.14.w,
+                          width: 25.14.w,
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 8.0, left: 8.0),
+                            padding: EdgeInsetsResponsive.only(
+                                right: 8.0, left: 8.0),
                             child: Center(
-                              child: Icon(Icons.arrow_back),
+                              child: isCrossIcon == true
+                                  ? SvgPicture.asset(
+                                      'assets/images/cross.svg',
+                                      height: 15.5.h,
+                                      width: 22.14.w,
+                                    )
+                                  : Icon(
+                                      Icons.arrow_back,
+                                      size: ScreenUtil().setSp(20),
+                                    ),
                             ),
                           ),
                         ),
@@ -62,12 +73,12 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                     : GestureDetector(
                         onTap: () => Navigator.push(
                             context, SlideRightRoute(page: CustomDrawer())),
-                        child: Container(
+                        child: ContainerResponsive(
                           height: 40.5.h,
                           width: 40.14.w,
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 8.0, left: 8.0),
+                            padding: EdgeInsetsResponsive.only(
+                                right: 8.0, left: 8.0),
                             child: Center(
                               child: SvgPicture.asset(
                                 'assets/images/homeMenu.svg',
@@ -82,50 +93,51 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                   title.toUpperCase(),
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 17,
+                      fontSize: ScreenUtil().setSp(17),
                       fontFamily: 'Oswald',
-                      fontWeight: FontWeight.w300),
+                      fontWeight: FontWeight.w400),
                 ),
                 showClearBtn == true
                     ? GestureDetector(
                         onTap: () => onClear(),
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                          padding:
+                              EdgeInsetsResponsive.only(right: 8.0, left: 8.0),
                           child: AutoSizeText(
                             'CLEAR',
                             textAlign: TextAlign.right,
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 10,
+                                fontSize: ScreenUtil().setSp(10),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w100),
                           ),
                         ),
                       )
-                    : hideFilter == true
-                        ? Container()
-                        : GestureDetector(
-                            onTap: () => Navigator.push(
+                    : GestureDetector(
+                        onTap: () => hideFilter == true
+                            ? print('')
+                            : Navigator.push(
                                 context,
                                 SlideTopRoute(
                                     page: FilterView(
                                   productList: productList,
                                 ))),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 8.0, left: 8.0),
-                              child: Center(
-                                child: AutoSizeText(
-                                  'Filter',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 10,
-                                      fontFamily: 'Oswald',
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
+                        child: Padding(
+                          padding: EdgeInsetsResponsive.only(
+                              right: 28.0, left: 28.0),
+                          child: Center(
+                            child: AutoSizeText(
+                              hideFilter == true ? '     ' : 'Filter',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: ScreenUtil().setSp(12),
+                                  fontFamily: 'Oswald',
+                                  fontWeight: FontWeight.w300),
                             ),
                           ),
+                        ),
+                      ),
               ],
             ),
           ],

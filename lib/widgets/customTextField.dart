@@ -11,6 +11,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -55,18 +56,18 @@ class CustomTextField extends StatelessWidget {
             ),
             hintText: _hint,
             hintStyle: TextStyle(
-              fontSize: 14,
+              fontSize: ScreenUtil().setSp(14),
               fontFamily: 'Oswald',
             ),
             labelText: _lable,
             labelStyle: TextStyle(
-              fontSize: 14,
+              fontSize: ScreenUtil().setSp(14),
               fontFamily: 'Oswald',
             ),
             alignLabelWithHint: true,
             icon: _icon),
         style: TextStyle(
-          fontSize: 14,
+          fontSize: ScreenUtil().setSp(14),
           fontFamily: 'Oswald',
         ),
         validator: _validator,

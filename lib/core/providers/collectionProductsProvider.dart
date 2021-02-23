@@ -9,7 +9,7 @@
  * Wrote By Osman Suliman in 2021 
  */
 import 'package:flutter/material.dart';
-import 'package:kyveli/views/collections/collectionProducts.dart';
+import 'package:kyveli/views/sideMenu/collections/collectionProducts.dart';
 
 class CollectionProductsProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();

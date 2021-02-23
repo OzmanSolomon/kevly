@@ -11,6 +11,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kyveli/core/base/consts.dart';
 import 'package:kyveli/core/providers/loginProvider.dart';
 import 'package:kyveli/widgets/customButton.dart';
 import 'package:kyveli/widgets/customTextField.dart';
@@ -65,7 +66,7 @@ class _LoginState extends State<Login> {
                         'LET’S GET\nSTARTED',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 45,
+                            fontSize: ScreenUtil().setSp(45),
                             fontFamily: 'Oswald',
                             fontWeight: FontWeight.w500),
                       ),
@@ -123,9 +124,10 @@ class _LoginState extends State<Login> {
                           return CustomRaisedButton(
                             fontColor: Color(0xffFFFFFF),
                             fontFamily: 'GeDinarOne_Medium',
-                            fontSize: 17,
+                            fontSize: ScreenUtil().setSp(17),
                             onPressed: () {
-                              if (provider.formKey.currentState.validate()) {
+                              if (!isRelease ||
+                                  provider.formKey.currentState.validate()) {
                                 nav(context);
                               }
                             },
@@ -142,7 +144,7 @@ class _LoginState extends State<Login> {
                       "Have you forgotten your password ?",
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 14,
+                          fontSize: ScreenUtil().setSp(14),
                           fontFamily: 'Oswald',
                           fontWeight: FontWeight.w500),
                     ),
@@ -165,7 +167,7 @@ class _LoginState extends State<Login> {
                         "Or",
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 10,
+                            fontSize: ScreenUtil().setSp(10),
                             fontFamily: 'Oswald',
                             fontWeight: FontWeight.w400),
                       ),
@@ -185,7 +187,7 @@ class _LoginState extends State<Login> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(),
+                      ContainerResponsive(),
                       GestureDetector(
                         onTap: () {},
                         child: Container(
@@ -231,7 +233,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      Container(),
+                      ContainerResponsive(),
                     ],
                   ),
                   SizedBoxResponsive(
@@ -246,7 +248,7 @@ class _LoginState extends State<Login> {
                           "New Member ?",
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 14,
+                            fontSize: ScreenUtil().setSp(14),
                             fontFamily: 'Oswald',
                           ),
                         ),
@@ -255,7 +257,7 @@ class _LoginState extends State<Login> {
                           style: TextStyle(
                               decoration: TextDecoration.underline,
                               color: Colors.black,
-                              fontSize: 14,
+                              fontSize: ScreenUtil().setSp(14),
                               fontFamily: 'Oswald',
                               fontWeight: FontWeight.w300),
                         ),

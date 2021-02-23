@@ -52,15 +52,20 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Consumer<BagProvider>(
-                          builder: (context, provider, child) {
-                        return Column(
-                          children: [productWidget(provider), slider(provider)],
-                        );
-                      }),
-                      SizedBoxResponsive(
-                        height: 30,
-                      ),
+                      // Consumer<BagProvider>(
+                      //     builder: (context, provider, child) {
+                      //   return Column(
+                      //     children:
+                      //     [
+                      productWidget(
+                          Provider.of<BagProvider>(context, listen: false)),
+                      slider(Provider.of<BagProvider>(context, listen: false)),
+                      //     ],
+                      // );
+                      // }),
+                      // SizedBoxResponsive(
+                      //   height: 30,
+                      // ),
                       Provider.of<BagProvider>(context, listen: false)
                                       .promoCode !=
                                   null &&
@@ -96,7 +101,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                         AutoSizeText(
                                           'PROMO CODE',
                                           style: TextStyle(
-                                              fontSize: 15,
+                                              fontSize: ScreenUtil().setSp(15),
                                               fontFamily: 'Oswald',
                                               fontWeight: FontWeight.w400),
                                         ),
@@ -105,7 +110,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                                   listen: false)
                                               .promoCode,
                                           style: TextStyle(
-                                              fontSize: 14,
+                                              fontSize: ScreenUtil().setSp(14),
                                               fontFamily: 'Oswald',
                                               fontWeight: FontWeight.w300),
                                         )
@@ -115,7 +120,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                 ],
                               ),
                             )
-                          : Container(),
+                          : ContainerResponsive(),
                       SizedBoxResponsive(
                         height: 30,
                       ),
@@ -128,7 +133,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                           AutoSizeText(
                             'ADDRESS',
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: ScreenUtil().setSp(16),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w400),
                           ),
@@ -148,7 +153,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                             return AutoSizeText(
                               provider.address,
                               style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: ScreenUtil().setSp(13),
                                   color: Color(0xff666E74),
                                   fontFamily: 'Oswald',
                                   fontWeight: FontWeight.w300),
@@ -168,7 +173,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                           AutoSizeText(
                             'Delivery',
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: ScreenUtil().setSp(16),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w400),
                           ),
@@ -185,7 +190,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                         return GestureDetector(
                           onTap: () => provider.onSelectMethod(
                               method: methodsList[index]),
-                          child: Container(
+                          child: ContainerResponsive(
                             height: 70,
                             width: width,
                             margin: EdgeInsets.all(20),
@@ -208,7 +213,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 15,
+                                            fontSize: ScreenUtil().setSp(15),
                                             fontFamily: 'Oswald',
                                             fontWeight: FontWeight.w300),
                                       ),
@@ -217,7 +222,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 13,
+                                            fontSize: ScreenUtil().setSp(13),
                                             fontFamily: 'Oswald',
                                             fontWeight: FontWeight.w300),
                                       ),
@@ -232,7 +237,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 15,
+                                        fontSize: ScreenUtil().setSp(15),
                                         fontFamily: 'Oswald',
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -254,7 +259,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                           AutoSizeText(
                             'PAYMENT METHOD',
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: ScreenUtil().setSp(16),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w400),
                           ),
@@ -286,7 +291,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                             break;
                           default:
                         }
-                        return Container(
+                        return ContainerResponsive(
                           height: 70,
                           width: width - 20,
                           margin: EdgeInsets.all(20),
@@ -299,7 +304,11 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(18.0),
-                                child: Image.asset(cardPic),
+                                child: Image.asset(
+                                  cardPic,
+                                  width: 40.w,
+                                  height: 40.h,
+                                ),
                               ),
                               Center(
                                 child: AutoSizeText(
@@ -315,12 +324,12 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 17,
+                                      fontSize: ScreenUtil().setSp(17),
                                       fontFamily: 'Oswald',
                                       fontWeight: FontWeight.w400),
                                 ),
                               ),
-                              Container()
+                              ContainerResponsive()
                             ],
                           ),
                         );
@@ -343,11 +352,11 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                           decoration:
                                               TextDecoration.lineThrough,
                                           color: appTheme().accentColor,
-                                          fontSize: 10,
+                                          fontSize: ScreenUtil().setSp(10),
                                           fontFamily: 'Oswald',
                                           fontWeight: FontWeight.w300),
                                     )
-                                  : Container(),
+                                  : ContainerResponsive(),
                               AutoSizeText(
                                 provider.promoCodeApplied
                                     ? 'Total  ' +
@@ -359,7 +368,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                         ' USD',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 16,
+                                    fontSize: ScreenUtil().setSp(16),
                                     fontFamily: 'Oswald',
                                     fontWeight: FontWeight.w500),
                               ),
@@ -370,7 +379,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                 '*VAT Included',
                                 style: TextStyle(
                                     color: Color(0xff8D8D8D),
-                                    fontSize: 14,
+                                    fontSize: ScreenUtil().setSp(14),
                                     fontFamily: 'Oswald',
                                     fontWeight: FontWeight.w300),
                               ),
@@ -401,7 +410,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 17,
+                                      fontSize: ScreenUtil().setSp(17),
                                       fontFamily: 'Oswald',
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -424,9 +433,9 @@ class _FinalCheckoutState extends State<FinalCheckout> {
     );
   }
 
-  Container slider(BagProvider provider) {
-    return Container(
-      height: 150,
+  ContainerResponsive slider(BagProvider provider) {
+    return ContainerResponsive(
+      height: 200,
       child: ListView.builder(
           shrinkWrap: true,
           physics: ClampingScrollPhysics(),
@@ -447,13 +456,13 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                       child: Image.asset(
                         provider.bagItems[index]['img'],
                         fit: BoxFit.cover,
-                        height: 120,
+                        height: 120.h,
                       ),
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    Container(
+                    ContainerResponsive(
                       width: 44,
                       height: 4,
                       color: provider.finalCheckoutSliderIndex == index
@@ -480,6 +489,8 @@ class _FinalCheckoutState extends State<FinalCheckout> {
               ),
               child: Image.asset(
                 provider.bagItems[provider.finalCheckoutSliderIndex]['img'],
+                width: 160.w,
+                height: 220.h,
                 fit: BoxFit.cover,
               ),
             ),
@@ -494,14 +505,14 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Container(
+                    child: ContainerResponsive(
                       width: 90,
                       child: AutoSizeText(
                         provider.bagItems[provider.finalCheckoutSliderIndex]
                             ['name'],
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 14,
+                            fontSize: ScreenUtil().setSp(14),
                             fontFamily: 'Oswald',
                             fontWeight: FontWeight.w500),
                       ),
@@ -517,79 +528,9 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                     '',
                 style: TextStyle(
                     color: Color(0xff8D8D8D),
-                    fontSize: 10,
+                    fontSize: ScreenUtil().setSp(10),
                     fontFamily: 'Oswald',
                     fontWeight: FontWeight.w300),
-              ),
-              Row(
-                children: [
-                  provider.bagItems[provider.finalCheckoutSliderIndex]
-                              ['size'] !=
-                          null
-                      ? Container(
-                          height: 33,
-                          width: 33,
-                          margin: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(360),
-                              border:
-                                  Border.all(color: Colors.black, width: 1)),
-                          alignment: Alignment.center,
-                          child: AutoSizeText(
-                            provider.bagItems[provider.finalCheckoutSliderIndex]
-                                ['size'],
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontFamily: 'Oswald',
-                                fontWeight: FontWeight.w300),
-                          ),
-                        )
-                      : Container(),
-                  GestureDetector(
-                    onTap: () => provider
-                        .decreaseQuantity(provider.finalCheckoutSliderIndex),
-                    child: AutoSizeText(
-                      '<',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 10,
-                          fontFamily: 'Oswald',
-                          fontWeight: FontWeight.w300),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  AutoSizeText(
-                    '${provider.bagItems[provider.finalCheckoutSliderIndex]['quantity']}',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontFamily: 'Oswald',
-                        fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  GestureDetector(
-                    onTap: () => provider
-                        .increaseQuantity(provider.finalCheckoutSliderIndex),
-                    child: AutoSizeText(
-                      '>',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 10,
-                          fontFamily: 'Oswald',
-                          fontWeight: FontWeight.w300),
-                    ),
-                  ),
-                ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -605,7 +546,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                         ' USD',
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 12,
+                        fontSize: ScreenUtil().setSp(12),
                         fontFamily: 'Oswald',
                         fontWeight: FontWeight.w300),
                   ),
@@ -617,7 +558,7 @@ class _FinalCheckoutState extends State<FinalCheckout> {
                         ' USD',
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 12,
+                        fontSize: ScreenUtil().setSp(12),
                         fontFamily: 'Oswald',
                         fontWeight: FontWeight.w500),
                   ),

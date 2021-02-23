@@ -40,288 +40,283 @@ class _ProductDetailsState extends State<ProductDetails> {
       child: Scaffold(
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Form(
-            child: SingleChildScrollView(
-              child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Stack(
-                      children: [
-                        Provider.of<ProductDetialsProvider>(context,
-                                        listen: false)
-                                    .imageSliders !=
-                                null
-                            ? Consumer<ProductDetialsProvider>(
-                                builder: (context, provider, child) {
-                                return CarouselSlider(
-                                  items: provider.imageSliders,
-                                  options: CarouselOptions(
-                                      scrollDirection: Axis.vertical,
-                                      enlargeCenterPage: true,
-                                      aspectRatio: width / 480,
-                                      viewportFraction: 1,
-                                      onPageChanged: (index, reason) {
-                                        setState(() {
-                                          provider.current = index;
-                                        });
-                                      }),
-                                );
-                              })
-                            : Container(),
-                        Positioned(
-                          right: 26,
-                          top: 480 / 2,
-                          child: Consumer<ProductDetialsProvider>(
+          child: SingleChildScrollView(
+            child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Stack(
+                    children: [
+                      Provider.of<ProductDetialsProvider>(context,
+                                      listen: false)
+                                  .imageSliders !=
+                              null
+                          ? Consumer<ProductDetialsProvider>(
                               builder: (context, provider, child) {
-                            List<String> myList =
-                                provider.product['silder_images'];
+                              return CarouselSlider(
+                                items: provider.imageSliders,
+                                options: CarouselOptions(
+                                    scrollDirection: Axis.vertical,
+                                    aspectRatio: width / 480.h,
+                                    viewportFraction: 1,
+                                    onPageChanged: (index, reason) {
+                                      setState(() {
+                                        provider.current = index;
+                                      });
+                                    }),
+                              );
+                            })
+                          : ContainerResponsive(),
+                      Positioned(
+                        right: 26,
+                        top: 480 / 2,
+                        child: Consumer<ProductDetialsProvider>(
+                            builder: (context, provider, child) {
+                          List<String> myList =
+                              provider.product['silder_images'];
 
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: myList.map((url) {
-                                int index = myList.indexOf(url);
-                                return Container(
-                                  padding: EdgeInsetsResponsive.all(8),
-                                  margin: EdgeInsetsResponsive.all(4),
-                                  width: 8,
-                                  height: 8,
-                                  decoration: BoxDecoration(
-                                    color: provider.current == index
-                                        ? Colors.white
-                                        : Colors.transparent,
-                                    border: Border.all(
-                                        color: Colors.white, width: 1),
-                                    borderRadius: BorderRadius.circular(360),
-                                  ),
-                                );
-                              }).toList(),
-                            );
-                          }),
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: myList.map((url) {
+                              int index = myList.indexOf(url);
+                              return ContainerResponsive(
+                                padding: EdgeInsetsResponsive.all(8),
+                                margin: EdgeInsetsResponsive.all(4),
+                                width: 8,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                  color: provider.current == index
+                                      ? Colors.white
+                                      : Colors.transparent,
+                                  border:
+                                      Border.all(color: Colors.white, width: 1),
+                                  borderRadius: BorderRadius.circular(360),
+                                ),
+                              );
+                            }).toList(),
+                          );
+                        }),
+                      ),
+                      ProductDetailsAppBar(),
+                    ],
+                  ),
+                  SizedBoxResponsive(
+                    height: 13,
+                  ),
+                  Consumer<ProductDetialsProvider>(
+                      builder: (context, provider, child) {
+                    return Row(
+                      children: [
+                        SizedBoxResponsive(
+                          width: 25,
                         ),
-                        ProductDetailsAppBar(),
+                        AutoSizeText(
+                          provider.product['status'].toUpperCase(),
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                              color: Color(0xff11AA6F),
+                              fontSize: ScreenUtil().setSp(12),
+                              fontFamily: 'Oswald',
+                              fontWeight: FontWeight.w400),
+                        ),
                       ],
-                    ),
-                    SizedBoxResponsive(
-                      height: 13,
-                    ),
-                    Consumer<ProductDetialsProvider>(
-                        builder: (context, provider, child) {
-                      return Row(
+                    );
+                  }),
+                  SizedBoxResponsive(
+                    height: 13,
+                  ),
+                  Consumer<ProductDetialsProvider>(
+                      builder: (context, provider, child) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBoxResponsive(
+                              width: 25,
+                            ),
+                            SizedBoxResponsive(
+                              width: 172,
+                              child: AutoSizeText(
+                                provider.product['name'],
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: ScreenUtil().setSp(21),
+                                    fontFamily: 'Oswald',
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                SizedBoxResponsive(
+                                  width: 20,
+                                ),
+                                AutoSizeText(
+                                  '\$' + provider.product['discount'] + ' USD',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: ScreenUtil().setSp(21),
+                                      fontFamily: 'Oswald',
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                SizedBoxResponsive(
+                                  width: 5,
+                                ),
+                                AutoSizeText(
+                                  '\$' + provider.product['price'] + ' USD',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.lineThrough,
+                                      color: appTheme().accentColor,
+                                      fontSize: ScreenUtil().setSp(14),
+                                      fontFamily: 'Oswald',
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ],
+                            ),
+                            SizedBoxResponsive(
+                              width: 25,
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  }),
+                  Consumer<ProductDetialsProvider>(
+                      builder: (context, provider, child) {
+                    return Row(
+                      children: [
+                        SizedBoxResponsive(
+                          width: 25,
+                        ),
+                        SizedBoxResponsive(
+                          width: 216,
+                          child: AutoSizeText(
+                            provider.product['disc'],
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: ScreenUtil().setSp(13),
+                                fontFamily: 'Oswald',
+                                fontWeight: FontWeight.w300),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+                  SizedBoxResponsive(
+                    height: 34,
+                  ),
+                  Center(
+                    child: ContainerResponsive(
+                      padding: EdgeInsetsResponsive.all(8),
+                      width: 325,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 1)),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          SvgPicture.asset(
+                            'assets/images/size.svg',
+                            width: 33.28.w,
+                            height: 17.h,
+                          ),
                           SizedBoxResponsive(
-                            width: 25,
+                            width: 5,
                           ),
                           AutoSizeText(
-                            provider.product['status'].toUpperCase(),
-                            textAlign: TextAlign.right,
+                            'Size guide',
+                            textAlign: TextAlign.left,
                             style: TextStyle(
-                                color: Color(0xff11AA6F),
-                                fontSize: 12,
+                                color: Colors.black,
+                                fontSize: ScreenUtil().setSp(16),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w400),
                           ),
                         ],
-                      );
-                    }),
-                    SizedBoxResponsive(
-                      height: 13,
+                      ),
                     ),
-                    Consumer<ProductDetialsProvider>(
-                        builder: (context, provider, child) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SizedBoxResponsive(
-                                width: 25,
-                              ),
-                              SizedBoxResponsive(
-                                width: 172,
-                                child: AutoSizeText(
-                                  provider.product['name'],
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 21,
-                                      fontFamily: 'Oswald',
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
+                  ),
+                  SizedBoxResponsive(
+                    height: 33,
+                  ),
+                  Column(
+                    children: [
+                      sizesWidget(),
+                      SizedBoxResponsive(
+                        height: 17,
+                      ),
+                      colorsWidget(width),
+                      SizedBoxResponsive(
+                        height: 17,
+                      ),
+                      sortWidget(width),
+                      SizedBoxResponsive(
+                        height: 17,
+                      ),
+                      Consumer<ProductDetialsProvider>(
+                          builder: (context, provider, child) {
+                        return Center(
+                          child: GestureDetector(
+                            onTap: () =>
+                                Provider.of<BagProvider>(context, listen: false)
+                                    .addToBag(
+                                        img: provider.product['image'],
+                                        name: provider.product['name'],
+                                        size: provider.selectedSize['value'],
+                                        price: provider.product['price'],
+                                        discount: provider.product['discount'],
+                                        desc: provider.product['disc']),
+                            child: ContainerResponsive(
+                              padding: EdgeInsetsResponsive.all(8),
+                              width: 325,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.black, width: 1)),
+                              alignment: Alignment.center,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBoxResponsive(
-                                    width: 20,
-                                  ),
                                   AutoSizeText(
-                                    '\$' +
-                                        provider.product['discount'] +
-                                        ' USD',
+                                    'ADD',
+                                    textAlign: TextAlign.left,
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 21,
+                                        fontSize: ScreenUtil().setSp(17),
                                         fontFamily: 'Oswald',
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                  SizedBoxResponsive(
-                                    width: 5,
-                                  ),
-                                  AutoSizeText(
-                                    '\$' + provider.product['price'] + ' USD',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        color: appTheme().accentColor,
-                                        fontSize: 14,
-                                        fontFamily: 'Oswald',
-                                        fontWeight: FontWeight.w300),
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ],
                               ),
-                              SizedBoxResponsive(
-                                width: 25,
-                              ),
-                            ],
-                          ),
-                        ],
-                      );
-                    }),
-                    Consumer<ProductDetialsProvider>(
-                        builder: (context, provider, child) {
-                      return Row(
-                        children: [
-                          SizedBoxResponsive(
-                            width: 25,
-                          ),
-                          SizedBoxResponsive(
-                            width: 216,
-                            child: AutoSizeText(
-                              provider.product['disc'],
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 13,
-                                  fontFamily: 'Oswald',
-                                  fontWeight: FontWeight.w300),
                             ),
                           ),
-                        ],
-                      );
-                    }),
-                    SizedBoxResponsive(
-                      height: 34,
-                    ),
-                    Center(
-                      child: ContainerResponsive(
-                        padding: EdgeInsetsResponsive.all(8),
-                        width: 325,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 1)),
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/size.svg',
-                              width: 33.28.w,
-                              height: 17.h,
-                            ),
-                            SizedBoxResponsive(
-                              width: 5,
-                            ),
-                            AutoSizeText(
-                              'Size guide',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontFamily: 'Oswald',
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
+                        );
+                      }),
+                      SizedBoxResponsive(
+                        height: 17,
                       ),
-                    ),
-                    SizedBoxResponsive(
-                      height: 33,
-                    ),
-                    Column(
-                      children: [
-                        sizesWidget(),
-                        SizedBoxResponsive(
-                          height: 17,
-                        ),
-                        colorsWidget(width),
-                        SizedBoxResponsive(
-                          height: 17,
-                        ),
-                        sortWidget(width),
-                        SizedBoxResponsive(
-                          height: 17,
-                        ),
-                        Consumer<ProductDetialsProvider>(
-                            builder: (context, provider, child) {
-                          return Center(
-                            child: GestureDetector(
-                              onTap: () => Provider.of<BagProvider>(context,
-                                      listen: false)
-                                  .addToBag(
-                                      img: provider.product['image'],
-                                      name: provider.product['name'],
-                                      size: provider.selectedSize['value'],
-                                      price: provider.product['price'],
-                                      discount: provider.product['discount'],
-                                      desc: provider.product['disc']),
-                              child: ContainerResponsive(
-                                padding: EdgeInsetsResponsive.all(8),
-                                width: 325,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.black, width: 1)),
-                                alignment: Alignment.center,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    AutoSizeText(
-                                      'ADD',
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 17,
-                                          fontFamily: 'Oswald',
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        }),
-                        SizedBoxResponsive(
-                          height: 17,
-                        ),
-                      ],
-                    ),
-                    SizedBoxResponsive(
-                      height: 17,
-                    ),
-                    Consumer<ProductDetialsProvider>(
-                        builder: (context, provider, child) {
-                      return VerticalView(
-                        list: provider.product['suggestions'],
-                        showAddToBagButton: true,
-                      );
-                    })
-                  ]),
-            ),
+                    ],
+                  ),
+                  SizedBoxResponsive(
+                    height: 17,
+                  ),
+                  Consumer<ProductDetialsProvider>(
+                      builder: (context, provider, child) {
+                    return VerticalView(
+                      list: provider.product['suggestions'],
+                      showAddToBagButton: true,
+                    );
+                  })
+                ]),
           ),
         ),
       ),
@@ -341,7 +336,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               textAlign: TextAlign.right,
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: ScreenUtil().setSp(15),
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w500),
             ),
@@ -350,7 +345,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         SizedBoxResponsive(
           height: 17,
         ),
-        Container(
+        ContainerResponsive(
           width: width,
           child: Consumer<ProductDetialsProvider>(
               builder: (context, provider, child) {
@@ -371,7 +366,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   return GestureDetector(
                     onTap: () =>
                         provider.onSelectColor(color: colorsList[index]),
-                    child: Container(
+                    child: ContainerResponsive(
                       width: 38,
                       height: 38,
                       margin: EdgeInsets.all(20),
@@ -389,7 +384,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 : Colors.transparent,
                             width: 2),
                       ),
-                      child: Container(
+                      child: ContainerResponsive(
                         width: 33,
                         height: 33,
                         padding: EdgeInsets.all(5),
@@ -416,7 +411,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 width: 11.58.w,
                                 height: 10.h,
                               )
-                            : Container(),
+                            : ContainerResponsive(),
                       ),
                     ),
                   );
@@ -440,7 +435,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               textAlign: TextAlign.right,
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: ScreenUtil().setSp(15),
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w500),
             ),
@@ -468,7 +463,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       : false;
                   return GestureDetector(
                     onTap: () => provider.onSelectSize(size: sizesList[index]),
-                    child: Container(
+                    child: ContainerResponsive(
                       height: 33,
                       width: 33,
                       margin: EdgeInsets.all(20),
@@ -485,7 +480,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             textAlign: TextAlign.right,
                             style: TextStyle(
                                 color: isSelected ? Colors.white : Colors.black,
-                                fontSize: 13,
+                                fontSize: ScreenUtil().setSp(13),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w300),
                           ),
@@ -513,7 +508,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               textAlign: TextAlign.right,
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: ScreenUtil().setSp(15),
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w500),
             ),
@@ -530,7 +525,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: [
                 GestureDetector(
                   onTap: () => provider.decreaseQuantity(),
-                  child: Container(
+                  child: ContainerResponsive(
                     height: 33,
                     width: 33,
                     margin: EdgeInsets.all(20),
@@ -544,7 +539,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 16,
+                          fontSize: ScreenUtil().setSp(16),
                           fontFamily: 'Oswald',
                           fontWeight: FontWeight.w300),
                     ),
@@ -555,13 +550,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                   textAlign: TextAlign.right,
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: ScreenUtil().setSp(16),
                       fontFamily: 'Oswald',
                       fontWeight: FontWeight.w300),
                 ),
                 GestureDetector(
                   onTap: () => provider.increaseQuantity(),
-                  child: Container(
+                  child: ContainerResponsive(
                     height: 33,
                     width: 33,
                     margin: EdgeInsets.all(20),
@@ -575,7 +570,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 16,
+                          fontSize: ScreenUtil().setSp(16),
                           fontFamily: 'Oswald',
                           fontWeight: FontWeight.w300),
                     ),
@@ -586,7 +581,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   textAlign: TextAlign.right,
                   style: TextStyle(
                       color: Color(0xff8D8D8D),
-                      fontSize: 15,
+                      fontSize: ScreenUtil().setSp(15),
                       fontFamily: 'Oswald',
                       fontWeight: FontWeight.w300),
                 ),
@@ -623,14 +618,14 @@ class ProductDetailsAppBar extends StatelessWidget
               onTap: () => Navigator.pop(context),
               child: SvgPicture.asset(
                 'assets/images/cross.svg',
-                width: 18,
-                height: 18,
+                width: 18.w,
+                height: 18.h,
               ),
             ),
           ),
           GestureDetector(
             onTap: () {},
-            child: Container(
+            child: ContainerResponsive(
               padding: EdgeInsetsResponsive.all(8),
               width: 36,
               height: 36,

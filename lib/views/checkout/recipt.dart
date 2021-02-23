@@ -52,7 +52,7 @@ class _ReciptState extends State<Recipt> {
                 onTap: () {
                   Provider.of<BottomNavProvider>(context, listen: false)
                       .bottomTapped(0);
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context, SlideBottomRoute(page: BottomNavBar()));
                 },
                 child: ContainerResponsive(
@@ -71,7 +71,7 @@ class _ReciptState extends State<Recipt> {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 17,
+                            fontSize: ScreenUtil().setSp(17),
                             fontFamily: 'Oswald',
                             fontWeight: FontWeight.w500),
                       ),
@@ -86,10 +86,10 @@ class _ReciptState extends State<Recipt> {
                 onTap: () {
                   Provider.of<BottomNavProvider>(context, listen: false)
                       .bottomTapped(0);
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context, SlideBottomRoute(page: BottomNavBar()));
                 },
-                child: Container(
+                child: ContainerResponsive(
                     width: 25,
                     height: 25,
                     child: SvgPicture.asset(
@@ -102,20 +102,21 @@ class _ReciptState extends State<Recipt> {
             IgnorePointer(
               child: Align(
                 alignment: Alignment.topRight,
-                child: Container(
+                child: ContainerResponsive(
                   child: Image.asset(
                     'assets/images/splashTopCorner.png',
                     height: 280.61.h,
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
             ),
             Positioned(
-              top: 172,
-              left: 54,
-              right: 54,
+              top: 172.h,
+              left: 54.w,
+              right: 54.w,
               child: IgnorePointer(
-                child: Container(
+                child: ContainerResponsive(
                   child: Image.asset(
                     'assets/images/logo.png',
                     height: 280.61.h,
@@ -125,9 +126,9 @@ class _ReciptState extends State<Recipt> {
               ),
             ),
             Positioned(
-              top: 351,
-              left: 54,
-              right: 54,
+              top: 351.h,
+              left: 54.w,
+              right: 54.w,
               child: IgnorePointer(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -137,7 +138,7 @@ class _ReciptState extends State<Recipt> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 20,
+                          fontSize: ScreenUtil().setSp(20),
                           fontFamily: 'playfairDisplay',
                           fontWeight: FontWeight.w300),
                     ),
@@ -147,7 +148,7 @@ KYVELI STORES''',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 24,
+                          fontSize: ScreenUtil().setSp(24),
                           fontFamily: 'playfairDisplay',
                           fontWeight: FontWeight.w500),
                     ),
@@ -157,7 +158,7 @@ The soonest!''',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 20,
+                          fontSize: ScreenUtil().setSp(20),
                           fontFamily: 'playfairDisplay',
                           fontWeight: FontWeight.w300),
                     ),
@@ -168,10 +169,12 @@ The soonest!''',
             IgnorePointer(
               child: Align(
                 alignment: Alignment.bottomLeft,
-                child: Container(
+                child: ContainerResponsive(
                   child: Image.asset(
                     'assets/images/splashbottomcorner.png',
                     height: 280.61.h,
+                    fit: BoxFit.fill,
+                    // width: 200.w,
                   ),
                 ),
               ),
@@ -179,7 +182,7 @@ The soonest!''',
             IgnorePointer(
               child: Opacity(
                 opacity: 0.1,
-                child: Container(
+                child: ContainerResponsive(
                   decoration: BoxDecoration(
                       image: DecorationImage(
                     image: AssetImage(

@@ -16,7 +16,7 @@ class LoaderFetchingData extends StatelessWidget {
         textStyle: TextStyle(
           color: Colors.black,
           fontFamily: 'Oswald',
-          fontSize: 30.0,
+          fontSize: ScreenUtil().setSp(30.0),
           fontWeight: FontWeight.w500,
         ),
         boxHeight: 100.0,
@@ -71,7 +71,7 @@ class _OverLayWidgetWithLoaderState extends State<OverLayWidgetWithLoader> {
         opacity: 0.55,
         child: Scaffold(
           key: _addInfoScaffoldKey,
-          body: Container(
+          body: ContainerResponsive(
             color: appTheme().accentColor,
             child: Stack(
               children: <Widget>[
@@ -82,7 +82,7 @@ class _OverLayWidgetWithLoaderState extends State<OverLayWidgetWithLoader> {
                   child: Center(
                     child: Column(
                       children: [
-                        Container(
+                        ContainerResponsive(
                           height: 200.0,
                           width: 200.0,
                           child: Center(
@@ -99,7 +99,7 @@ class _OverLayWidgetWithLoaderState extends State<OverLayWidgetWithLoader> {
                           "Loading ...",
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: ScreenUtil().setSp(18),
                               fontFamily: 'Oswald',
                               fontWeight: FontWeight.w500),
                         ),

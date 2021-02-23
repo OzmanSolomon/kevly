@@ -50,177 +50,170 @@ class _DelivreyState extends State<Delivrey> {
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
-              child: Form(
-                child: Column(children: <Widget>[
-                  Consumer<BagProvider>(builder: (context, provider, child) {
-                    List methodsList = provider.deliveryMethods;
-                    return ListView.builder(
-                        itemCount: methodsList.length,
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          bool isSelected = provider.deliveryMethods != null
-                              ? provider.deliveryMethod ==
-                                      provider.deliveryMethods[index]
-                                  ? true
-                                  : false
-                              : false;
-                          return GestureDetector(
-                            onTap: () => provider.onSelectMethod(
-                                method: methodsList[index]),
-                            child: Container(
-                              height: 70,
-                              width: 70,
-                              margin: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                  color:
-                                      isSelected ? Colors.black : Colors.white,
-                                  border: Border.all(
-                                      color: Colors.black, width: 1)),
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 18.0, right: 18),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        AutoSizeText(
-                                          methodsList[index]['name'],
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                              color: isSelected
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontSize: 15,
-                                              fontFamily: 'Oswald',
-                                              fontWeight: FontWeight.w300),
-                                        ),
-                                        AutoSizeText(
-                                          '(' +
-                                              methodsList[index]['time'] +
-                                              ')',
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                              color: isSelected
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontSize: 13,
-                                              fontFamily: 'Oswald',
-                                              fontWeight: FontWeight.w300),
-                                        ),
-                                      ],
-                                    ),
+              child: Column(children: <Widget>[
+                Consumer<BagProvider>(builder: (context, provider, child) {
+                  List methodsList = provider.deliveryMethods;
+                  return ListView.builder(
+                      itemCount: methodsList.length,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        bool isSelected = provider.deliveryMethods != null
+                            ? provider.deliveryMethod ==
+                                    provider.deliveryMethods[index]
+                                ? true
+                                : false
+                            : false;
+                        return GestureDetector(
+                          onTap: () => provider.onSelectMethod(
+                              method: methodsList[index]),
+                          child: ContainerResponsive(
+                            height: 70,
+                            width: 70,
+                            margin: EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                                color: isSelected ? Colors.black : Colors.white,
+                                border:
+                                    Border.all(color: Colors.black, width: 1)),
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 18.0, right: 18),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AutoSizeText(
+                                        methodsList[index]['name'],
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                            color: isSelected
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: ScreenUtil().setSp(15),
+                                            fontFamily: 'Oswald',
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                                      AutoSizeText(
+                                        '(' + methodsList[index]['time'] + ')',
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                            color: isSelected
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: ScreenUtil().setSp(13),
+                                            fontFamily: 'Oswald',
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                                    ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 18.0, right: 18),
-                                    child: AutoSizeText(
-                                      '\$' + methodsList[index]['cost'],
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                          color: isSelected
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontSize: 15,
-                                          fontFamily: 'Oswald',
-                                          fontWeight: FontWeight.w500),
-                                    ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 18.0, right: 18),
+                                  child: AutoSizeText(
+                                    '\$' + methodsList[index]['cost'],
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        color: isSelected
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: ScreenUtil().setSp(15),
+                                        fontFamily: 'Oswald',
+                                        fontWeight: FontWeight.w500),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          );
-                        });
-                  }),
-                  SizedBox(
-                    height: 121,
-                  ),
-                  Divider(
-                    thickness: 2,
-                  ),
-                  Center(
-                    child: Consumer<BagProvider>(
-                        builder: (context, provider, child) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBoxResponsive(
-                            height: 20,
                           ),
+                        );
+                      });
+                }),
+                SizedBox(
+                  height: 121,
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                Center(
+                  child: Consumer<BagProvider>(
+                      builder: (context, provider, child) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBoxResponsive(
+                          height: 20,
+                        ),
+                        AutoSizeText(
+                          provider.promoCodeApplied
+                              ? 'Total  ' +
+                                  provider.total.toStringAsFixed(2) +
+                                  ' USD'
+                              : 'Total  ' +
+                                  provider.totalDiscount.toStringAsFixed(2) +
+                                  ' USD',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: ScreenUtil().setSp(16),
+                              fontFamily: 'Oswald',
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBoxResponsive(
+                          height: 5,
+                        ),
+                        AutoSizeText(
+                          '*VAT Included',
+                          style: TextStyle(
+                              color: Color(0xff8D8D8D),
+                              fontSize: ScreenUtil().setSp(14),
+                              fontFamily: 'Oswald',
+                              fontWeight: FontWeight.w300),
+                        ),
+                      ],
+                    );
+                  }),
+                ),
+                SizedBoxResponsive(
+                  height: 20,
+                ),
+                Center(
+                  child: GestureDetector(
+                    onTap: () =>
+                        Provider.of<BagProvider>(context, listen: false)
+                                    .deliveryMethod !=
+                                null
+                            ? Navigator.push(
+                                context, SlideTopRoute(page: PaymentMethod()))
+                            : errorToast('select method'),
+                    child: ContainerResponsive(
+                      padding: EdgeInsetsResponsive.all(8),
+                      width: 325,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 1)),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                           AutoSizeText(
-                            provider.promoCodeApplied
-                                ? 'Total  ' +
-                                    provider.total.toStringAsFixed(2) +
-                                    ' USD'
-                                : 'Total  ' +
-                                    provider.totalDiscount.toStringAsFixed(2) +
-                                    ' USD',
+                            'NEXT',
+                            textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 16,
+                                fontSize: ScreenUtil().setSp(17),
                                 fontFamily: 'Oswald',
                                 fontWeight: FontWeight.w500),
                           ),
-                          SizedBoxResponsive(
-                            height: 5,
-                          ),
-                          AutoSizeText(
-                            '*VAT Included',
-                            style: TextStyle(
-                                color: Color(0xff8D8D8D),
-                                fontSize: 14,
-                                fontFamily: 'Oswald',
-                                fontWeight: FontWeight.w300),
-                          ),
                         ],
-                      );
-                    }),
-                  ),
-                  SizedBoxResponsive(
-                    height: 20,
-                  ),
-                  Center(
-                    child: GestureDetector(
-                      onTap: () =>
-                          Provider.of<BagProvider>(context, listen: false)
-                                      .deliveryMethod !=
-                                  null
-                              ? Navigator.push(
-                                  context, SlideTopRoute(page: PaymentMethod()))
-                              : errorToast('select method'),
-                      child: ContainerResponsive(
-                        padding: EdgeInsetsResponsive.all(8),
-                        width: 325,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 1)),
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AutoSizeText(
-                              'NEXT',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                  fontFamily: 'Oswald',
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  )
-                ]),
-              ),
+                ),
+                SizedBox(
+                  height: 30,
+                )
+              ]),
             ),
           ),
         ),
@@ -238,7 +231,7 @@ class _DelivreyState extends State<Delivrey> {
             title,
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 14,
+                fontSize: ScreenUtil().setSp(14),
                 fontFamily: 'Oswald',
                 fontWeight: FontWeight.w300),
           ),

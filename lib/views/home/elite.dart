@@ -35,9 +35,7 @@ class _EliteState extends State<Elite> {
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
-            child: Form(
-              child: Column(children: <Widget>[]),
-            ),
+            child: Column(children: <Widget>[]),
           ),
         ),
       ),

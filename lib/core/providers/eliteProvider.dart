@@ -118,7 +118,7 @@ class EliteProvider extends ChangeNotifier {
           a,
           style: TextStyle(
               color: Colors.black,
-              fontSize: 15,
+              fontSize: ScreenUtil().setSp(15),
               fontFamily: 'Oswald',
               fontWeight: FontWeight.w300),
         ),
