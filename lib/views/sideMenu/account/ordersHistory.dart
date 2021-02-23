@@ -83,7 +83,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           ContainerResponsive(
-                                            width: width - 90,
+                                            width: 330,
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -116,7 +116,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                                           ),
                                           ContainerResponsive(
                                               height: 110,
-                                              width: width - 80,
+                                              width: 330,
                                               alignment: Alignment.center,
                                               child: ClipRRect(
                                                 borderRadius:

@@ -94,8 +94,8 @@ class _ReciptState extends State<Recipt> {
                     height: 25,
                     child: SvgPicture.asset(
                       'assets/images/cross.svg',
-                      width: 10,
-                      height: 10,
+                      width: 25.w,
+                      height: 25.h,
                     )),
               ),
             ),

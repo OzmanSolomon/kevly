@@ -191,45 +191,51 @@ class _LoginState extends State<Login> {
                       GestureDetector(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsetsResponsive.all(8),
-                          width: 46.37,
-                          height: 46.37,
+                          width: ScreenUtil().setSp(46.37),
+                          height: ScreenUtil().setSp(46.37),
+                          padding: EdgeInsetsResponsive.all(10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(360),
                               border:
                                   Border.all(color: Colors.black, width: 2)),
                           child: SvgPicture.asset(
                             'assets/images/fb.svg',
+                            width: ScreenUtil().setSp(36.37),
+                            height: ScreenUtil().setSp(36.37),
                           ),
                         ),
                       ),
                       GestureDetector(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsetsResponsive.all(8),
-                          width: 46.37,
-                          height: 46.37,
+                          width: ScreenUtil().setSp(46.37),
+                          height: ScreenUtil().setSp(46.37),
+                          padding: EdgeInsetsResponsive.all(10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(360),
                               border:
                                   Border.all(color: Colors.black, width: 2)),
                           child: SvgPicture.asset(
                             'assets/images/instgram.svg',
+                            width: ScreenUtil().setSp(36.37),
+                            height: ScreenUtil().setSp(36.37),
                           ),
                         ),
                       ),
                       GestureDetector(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsetsResponsive.all(8),
-                          width: 46.37,
-                          height: 46.37,
+                          width: ScreenUtil().setSp(46.37),
+                          height: ScreenUtil().setSp(46.37),
+                          padding: EdgeInsetsResponsive.all(10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(360),
                               border:
                                   Border.all(color: Colors.black, width: 2)),
                           child: SvgPicture.asset(
                             'assets/images/google.svg',
+                            width: ScreenUtil().setSp(36.37),
+                            height: ScreenUtil().setSp(36.37),
                           ),
                         ),
                       ),

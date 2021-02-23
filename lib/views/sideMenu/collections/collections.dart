@@ -47,8 +47,8 @@ class _CustomCollectionViewState extends State<CustomCollectionView> {
                         onTap: () => Navigator.pop(context),
                         child: SvgPicture.asset(
                           'assets/images/cross.svg',
-                          width: 18,
-                          height: 18,
+                          width: 25.w,
+                          height: 25.h,
                         ),
                       ),
                     ),

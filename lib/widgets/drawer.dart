@@ -43,12 +43,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
       child: Scaffold(
         key: Provider.of<DrawerProvider>(context, listen: false).scaffoldKey,
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
-              child: Stack(
-                children: [
-                  Column(children: <Widget>[
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Column(children: <Widget>[
                     Align(
                       alignment: Alignment.topLeft,
                       child: Padding(
@@ -58,8 +58,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           onTap: () => Navigator.pop(context),
                           child: SvgPicture.asset(
                             'assets/images/cross.svg',
-                            width: 18,
-                            height: 18,
+                            width: 25.w,
+                          height: 25.h,
                           ),
                         ),
                       ),
@@ -137,134 +137,117 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                                             FontWeight.w500),
                                                   ),
                                                 )
-                                              : Center(
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      ContainerResponsive(),
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          provider
-                                                              .navigationPage(
-                                                                  context,
-                                                                  index);
-                                                        },
-                                                        child: Container(
-                                                          padding:
-                                                              EdgeInsetsResponsive
-                                                                  .all(8),
-                                                          width: 46.37,
-                                                          height: 46.37,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .accentColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        360),
-                                                          ),
-                                                          child:
-                                                              SvgPicture.asset(
-                                                            'assets/images/fb.svg',
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          provider
-                                                              .navigationPage(
-                                                                  context,
-                                                                  index);
-                                                        },
-                                                        child: Container(
-                                                          padding:
-                                                              EdgeInsetsResponsive
-                                                                  .all(8),
-                                                          width: 46.37,
-                                                          height: 46.37,
-                                                          decoration: BoxDecoration(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .accentColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          360),
-                                                              border: Border.all(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .accentColor,
-                                                                  width: 2)),
-                                                          child:
-                                                              SvgPicture.asset(
-                                                            'assets/images/instgram.svg',
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      GestureDetector(
-                                                        onTap: () {},
-                                                        child: Container(
-                                                          padding:
-                                                              EdgeInsetsResponsive
-                                                                  .all(8),
-                                                          width: 46.37,
-                                                          height: 46.37,
-                                                          decoration: BoxDecoration(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .accentColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          360),
-                                                              border: Border.all(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .accentColor,
-                                                                  width: 2)),
-                                                          child:
-                                                              SvgPicture.asset(
-                                                            'assets/images/google.svg',
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      ContainerResponsive(),
-                                                    ],
-                                                  ),
-                                                ),
+                                              : SocialMediaRow(),
                                 ),
                               );
                             });
                       }),
                     ),
                   ]),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Image.asset(
-                      'assets/images/splashTopCorner.png',
-                      height: 280.61.h,
-                      fit: BoxFit.fill,
-                    ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Image.asset(
+                    'assets/images/splashTopCorner.png',
+                    height: 280.61.h,
+                    fit: BoxFit.fill,
                   ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Image.asset(
-                      'assets/images/splashbottomcorner.png',
-                      height: 280.61.h,
-                      fit: BoxFit.fill,
-                    ),
+                ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Image.asset(
+                    'assets/images/splashbottomcorner.png',
+                    height: 280.61.h,
+                    fit: BoxFit.fill,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SocialMediaRow extends StatelessWidget {
+  const SocialMediaRow({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    ResponsiveWidgets.init(
+      context,
+      height: 812.0,
+      width: 375.0,
+      allowFontScaling: true,
+    );
+    return ResponsiveWidgets.builder(
+      height: 812.0,
+      width: 375.0,
+      allowFontScaling: true,
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ContainerResponsive(),
+            GestureDetector(
+              child: Container(
+                width: ScreenUtil().setSp(46.37),
+                height: ScreenUtil().setSp(46.37),
+                padding: EdgeInsetsResponsive.all(10),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).accentColor,
+                  borderRadius: BorderRadius.circular(360),
+                ),
+                child: SvgPicture.asset(
+                  'assets/images/fb.svg',
+                  width: ScreenUtil().setSp(36.37),
+                  height: ScreenUtil().setSp(36.37),
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            GestureDetector(
+              child: Container(
+                width: ScreenUtil().setSp(46.37),
+                height: ScreenUtil().setSp(46.37),
+                padding: EdgeInsetsResponsive.all(10),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).accentColor,
+                    borderRadius: BorderRadius.circular(360),
+                    border: Border.all(
+                        color: Theme.of(context).accentColor, width: 2)),
+                child: SvgPicture.asset(
+                  'assets/images/instgram.svg',
+                  width: ScreenUtil().setSp(36.37),
+                  height: ScreenUtil().setSp(36.37),
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                width: ScreenUtil().setSp(46.37),
+                height: ScreenUtil().setSp(46.37),
+                padding: EdgeInsetsResponsive.all(10),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).accentColor,
+                    borderRadius: BorderRadius.circular(360),
+                    border: Border.all(
+                        color: Theme.of(context).accentColor, width: 2)),
+                child: SvgPicture.asset(
+                  'assets/images/google.svg',
+                  width: ScreenUtil().setSp(36.37),
+                  height: ScreenUtil().setSp(36.37),
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            ContainerResponsive(),
+          ],
         ),
       ),
     );

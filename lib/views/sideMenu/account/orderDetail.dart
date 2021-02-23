@@ -50,15 +50,23 @@ class _OrderDetailsState extends State<OrderDetails> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Consumer<OrdersHistoryProvider>(
-                          builder: (context, provider, child) {
-                        return Column(
-                          children: [productWidget(provider), slider(provider)],
-                        );
-                      }),
-                      SizedBoxResponsive(
-                        height: 30,
-                      ),
+                      // Consumer<OrdersHistoryProvider>(
+                      //     builder: (context, provider, child) {
+                      //   return Column(
+                      //     children: [
+                      productWidget(Provider.of<OrdersHistoryProvider>(context,
+                          listen: false)),
+                      slider(
+                          Provider.of<OrdersHistoryProvider>(context,
+                              listen: false),
+                          width)
+                      //       ],
+                      //   );
+                      // }),
+                      ,
+                      // SizedBoxResponsive(
+                      //   height: 30,
+                      // ),
                       Provider.of<OrdersHistoryProvider>(context, listen: false)
                                       .orders[widget.orderIndex]['promoCode'] !=
                                   null &&
@@ -411,14 +419,15 @@ class _OrderDetailsState extends State<OrderDetails> {
     );
   }
 
-  ContainerResponsive slider(OrdersHistoryProvider provider) {
+  ContainerResponsive slider(OrdersHistoryProvider provider, width) {
     return ContainerResponsive(
       height: 200,
+      width: width,
       child: ListView.builder(
           shrinkWrap: true,
           physics: ClampingScrollPhysics(),
           scrollDirection: Axis.horizontal,
-          padding: EdgeInsetsResponsive.only(top: 0, right: 0, left: 0),
+          padding: EdgeInsetsResponsive.only(top: 0, right: 10, left: 10),
           itemCount: provider.orders[widget.orderIndex]['products'].length,
           itemBuilder: (context, index) {
             return GestureDetector(
@@ -435,7 +444,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         provider.orders[widget.orderIndex]['products'][index]
                             ['img'],
                         fit: BoxFit.cover,
-                        height: 120,
+                        height: 120.h,
                       ),
                     ),
                     SizedBox(
@@ -469,6 +478,8 @@ class _OrderDetailsState extends State<OrderDetails> {
               child: Image.asset(
                 provider.orders[widget.orderIndex]['products']
                     [provider.orderDetailsSliderIndex]['img'],
+                width: 160.w,
+                height: 220.h,
                 fit: BoxFit.cover,
               ),
             ),
