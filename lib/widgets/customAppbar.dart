@@ -13,6 +13,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     @required this.title,
     this.hideFilter,
     this.showClearBtn,
+    this.backgroundColor,
     this.onClear,
     @required this.isBackButton,
     this.productList,
@@ -20,6 +21,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   });
   final String title;
   final onClear;
+  final backgroundColor;
   final bool showClearBtn;
   final bool isCrossIcon;
   final bool hideFilter;
@@ -27,7 +29,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final List productList;
 
   @override
-  Size get preferredSize => Size.fromHeight(ScreenUtil().setSp(50));
+  Size get preferredSize => Size.fromHeight(ScreenUtil().setSp(52));
   @override
   Widget build(BuildContext context) {
     ResponsiveWidgets.init(
@@ -40,9 +42,13 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       height: 812.0,
       width: 375.0,
       allowFontScaling: true,
-      child: SafeArea(
+      child: Container(
+        color: backgroundColor != null ? backgroundColor : Colors.white,
         child: Column(
           children: [
+            SizedBoxResponsive(
+              height: 25,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -20,11 +20,14 @@ import 'core/providers/bookAppointmentProvider.dart';
 import 'core/providers/bottomNavProvider.dart';
 import 'core/providers/collectionProductsProvider.dart';
 import 'core/providers/collectionProvider.dart';
+import 'core/providers/forgetPasswordProvider.dart';
 import 'core/providers/giftCard.dart';
 import 'core/providers/ordersHistoryProvider.dart';
 import 'core/providers/productDetails.dart';
 import 'core/providers/searchProvider.dart';
 import 'package:device_preview/device_preview.dart';
+
+import 'core/providers/signupProvider.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -32,7 +35,7 @@ import 'package:device_preview/device_preview.dart';
 void main() {
   runApp(
     DevicePreview(
-      enabled: true,
+      enabled: false,
       builder: (context) => MyApp(), // Wrap your app
     ),
   );
@@ -62,6 +65,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AddressProvider()),
         ChangeNotifierProvider(create: (_) => AccountProvider()),
         ChangeNotifierProvider(create: (_) => OrdersHistoryProvider()),
+        ChangeNotifierProvider(create: (_) => ForgetPasswordProvider()),
+        ChangeNotifierProvider(create: (_) => SignupProvider()),
       ],
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,

@@ -39,7 +39,6 @@ class _OrderHistoryState extends State<OrderHistory> {
       width: 375.0,
       allowFontScaling: true,
     );
-    var width = MediaQuery.of(context).size.width;
     return ResponsiveWidgets.builder(
       height: 812.0,
       width: 375.0,

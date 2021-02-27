@@ -30,6 +30,11 @@ dependencies:
   convex_bottom_bar: 2.4.1
   auto_size_text: ^2.1.0
   device_preview: ^0.5.5
+  # google_maps_flutter: ^0.0.3
+  google_maps_flutter: ^0.5.24+1
+  # flutter_google_places: ^0.1.4
+  location: ^2.3.5
+  geolocator: "^5.0.0"
 dev_dependencies:
   flutter_native_splash: ^0.2.9
   flutter_test:

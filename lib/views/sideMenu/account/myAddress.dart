@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/providers/addressProvider.dart';
-import 'package:kyveli/core/providers/bagProvider.dart';
 import 'package:kyveli/widgets/customAppbar.dart';
+import 'package:kyveli/widgets/navigations.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+
+import 'addAddress.dart';
 
 class MyAddress extends StatefulWidget {
   @override
@@ -17,9 +19,6 @@ class _MyAddressState extends State<MyAddress> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<BagProvider>(context, listen: false).setRegions();
-    });
   }
 
   @override
@@ -142,6 +141,8 @@ class _MyAddressState extends State<MyAddress> {
                     ),
                   ]),
                   GestureDetector(
+                    onTap: () => Navigator.push(
+                        context, SlideTopRoute(page: AddAddress())),
                     child: ContainerResponsive(
                       padding: EdgeInsetsResponsive.all(8),
                       margin: EdgeInsetsResponsive.only(bottom: 28),

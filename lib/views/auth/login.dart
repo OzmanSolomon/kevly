@@ -13,11 +13,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kyveli/core/base/consts.dart';
 import 'package:kyveli/core/providers/loginProvider.dart';
+import 'package:kyveli/views/auth/signup.dart';
 import 'package:kyveli/widgets/customButton.dart';
 import 'package:kyveli/widgets/customTextField.dart';
 import 'package:kyveli/widgets/validators.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+
+import 'forgetPassword.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -139,14 +142,22 @@ class _LoginState extends State<Login> {
                     height: 10,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                            opaque: false,
+                            pageBuilder: (BuildContext context, _, __) {
+                              return ForgetPassword();
+                            }),
+                      );
+                    },
                     child: AutoSizeText(
                       "Have you forgotten your password ?",
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: ScreenUtil().setSp(14),
+                          fontSize: ScreenUtil().setSp(12),
                           fontFamily: 'Oswald',
-                          fontWeight: FontWeight.w500),
+                          fontWeight: FontWeight.w300),
                     ),
                   ),
                   SizedBoxResponsive(
@@ -246,7 +257,15 @@ class _LoginState extends State<Login> {
                     height: 90.6,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                            opaque: false,
+                            pageBuilder: (BuildContext context, _, __) {
+                              return Signup();
+                            }),
+                      );
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -265,7 +284,7 @@ class _LoginState extends State<Login> {
                               color: Colors.black,
                               fontSize: ScreenUtil().setSp(14),
                               fontFamily: 'Oswald',
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
